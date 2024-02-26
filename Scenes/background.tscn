@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4aye30taop7c"]
+
+[ext_resource type="Texture2D" uid="uid://5hjvxq7i2yb6" path="res://Assets/Map/BG1.png" id="1_w3kps"]
+
+[node name="Background" type="Node2D"]
+
+[node name="B1" type="Sprite2D" parent="."]
+position = Vector2(-640, 360)
+texture = ExtResource("1_w3kps")
+
+[node name="B2" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("1_w3kps")
+
+[node name="B3" type="Sprite2D" parent="."]
+position = Vector2(1920, 360)
+texture = ExtResource("1_w3kps")

@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmme5lj1ruujk"]
+
+[ext_resource type="Script" path="res://Scripts/menu_paused.gd" id="1_pvi16"]
+
+[node name="MenuPaused" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+scale = Vector2(0.998732, 1.00856)
+script = ExtResource("1_pvi16")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -400.0
+offset_right = 1600.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.482353)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 386.49
+offset_top = 324.225
+offset_right = 2586.49
+offset_bottom = 859.225
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.199746, 0.213534)
+theme_override_font_sizes/normal_font_size = 200
+text = "			Paused
+Press \"P\" to unpause"
+scroll_active = false

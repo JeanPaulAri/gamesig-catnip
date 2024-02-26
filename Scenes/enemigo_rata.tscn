@@ -1,0 +1,300 @@
+[gd_scene load_steps=19 format=3 uid="uid://cmsuk6a2w8ein"]
+
+[ext_resource type="Script" path="res://Scripts/Enemigo_Rata.gd" id="1_4xk5e"]
+[ext_resource type="Texture2D" uid="uid://bpdoxa4m23o1k" path="res://Assets/Player/walk and idle.png" id="2_5egyy"]
+[ext_resource type="Texture2D" uid="uid://dlo50ux1hc8n2" path="res://Assets/Player/attack and die.png" id="3_0cgdy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8cd4"]
+size = Vector2(83, 117)
+
+[sub_resource type="Animation" id="Animation_1llm3"]
+resource_name = "AttackLeft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackLeft/CollisionAttackLeft:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_2k1r4"]
+resource_name = "AttackRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackRight/CollisionAttackRight:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_7b1o6"]
+resource_name = "DieLeft"
+
+[sub_resource type="Animation" id="Animation_ia2t7"]
+resource_name = "DieRight"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_tio5i"]
+resource_name = "IdleLeft"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movement:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_rfdc7"]
+resource_name = "IdleNull"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movement:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ay34p"]
+resource_name = "IdleRight"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movement:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_g4iq5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movement:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attack:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackLeft/CollisionAttackLeft:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackRight/CollisionAttackRight:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_3hiyg"]
+resource_name = "WalkLeft"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movement:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_h1yvi"]
+resource_name = "WalkRight"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movement:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ke0qo"]
+_data = {
+"AttackLeft": SubResource("Animation_1llm3"),
+"AttackRight": SubResource("Animation_2k1r4"),
+"DieLeft": SubResource("Animation_7b1o6"),
+"DieRight": SubResource("Animation_ia2t7"),
+"IdleLeft": SubResource("Animation_tio5i"),
+"IdleNull": SubResource("Animation_rfdc7"),
+"IdleRight": SubResource("Animation_ay34p"),
+"RESET": SubResource("Animation_g4iq5"),
+"WalkLeft": SubResource("Animation_3hiyg"),
+"WalkRight": SubResource("Animation_h1yvi")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryvcn"]
+size = Vector2(1003.12, 333.526)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqbdw"]
+size = Vector2(49.021, 22.7506)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scjbj"]
+size = Vector2(51.4836, 20)
+
+[node name="Enemigo_Rata" type="CharacterBody2D"]
+position = Vector2(609, 517)
+rotation = 0.00622811
+script = ExtResource("1_4xk5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9.50006, 5.5)
+shape = SubResource("RectangleShape2D_g8cd4")
+
+[node name="Movement" type="Sprite2D" parent="."]
+scale = Vector2(7, 7)
+texture = ExtResource("2_5egyy")
+hframes = 8
+vframes = 3
+
+[node name="Attack" type="Sprite2D" parent="."]
+scale = Vector2(7, 7)
+texture = ExtResource("3_0cgdy")
+hframes = 5
+vframes = 4
+
+[node name="Muerto" type="Sprite2D" parent="."]
+position = Vector2(16.0121, 1.90031)
+scale = Vector2(7, 7)
+texture = ExtResource("3_0cgdy")
+hframes = 5
+vframes = 4
+frame = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ke0qo")
+}
+
+[node name="Deteccion" type="Area2D" parent="."]
+position = Vector2(-112.96, 6.70366)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="Deteccion"]
+visible = false
+position = Vector2(13.852, 21.1338)
+shape = SubResource("RectangleShape2D_ryvcn")
+
+[node name="AttackLeft" type="Area2D" parent="."]
+
+[node name="CollisionAttackLeft" type="CollisionShape2D" parent="AttackLeft"]
+position = Vector2(-56.326, 30.4042)
+shape = SubResource("RectangleShape2D_uqbdw")
+disabled = true
+
+[node name="AttackRight" type="Area2D" parent="."]
+
+[node name="CollisionAttackRight" type="CollisionShape2D" parent="AttackRight"]
+position = Vector2(72.4308, 29.5135)
+shape = SubResource("RectangleShape2D_scjbj")
+disabled = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Deteccion" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Deteccion" to="." method="_on_deteccion_body_entered"]
+[connection signal="body_entered" from="AttackLeft" to="." method="_on_attack_left_body_entered"]
+[connection signal="body_entered" from="AttackRight" to="." method="_on_attack_right_body_entered"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
