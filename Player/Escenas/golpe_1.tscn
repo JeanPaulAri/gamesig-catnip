@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ltwdbab8em3j"]
+
+[ext_resource type="Script" path="res://Player/Scripts/golpe_1.gd" id="1_o3fhr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7p5u"]
+size = Vector2(10, 20)
+
+[node name="Golpe1" type="Node2D"]
+script = ExtResource("1_o3fhr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+
+[node name="Colisionador" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_a7p5u")
+
+[node name="AtaqueTiempo" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

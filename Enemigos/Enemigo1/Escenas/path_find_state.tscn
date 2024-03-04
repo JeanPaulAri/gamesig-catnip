@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://8tradctbhcyf"]
+
+[ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/PathFindState.gd" id="1_chkac"]
+
+[node name="PathFindComponent" type="Node2D"]
+script = ExtResource("1_chkac")
+move_speed = 10.0
