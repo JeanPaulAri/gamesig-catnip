@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv7eo77rlfpxt"]
+
+[ext_resource type="Script" path="res://Componentes/Entidades/HitboxComponente.gd" id="1_c31lr"]
+
+[node name="HitboxComponente" type="Area2D"]
+light_mask = 3
+visibility_layer = 3
+script = ExtResource("1_c31lr")

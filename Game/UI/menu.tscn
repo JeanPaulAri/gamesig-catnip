@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk4l8g54uw2j8"]
+
+[ext_resource type="Script" path="res://Game/Control_center/menuScript.gd" id="1_avtgi"]
+[ext_resource type="Texture2D" uid="uid://08ya0cfb5sk0" path="res://Assets/FAVICON.png" id="2_xjilc"]
+[ext_resource type="AudioStream" uid="uid://cvupaus3ultc7" path="res://Sounds/aceptar.wav" id="3_6nls7"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_avtgi")
+
+[node name="Favicon" type="Sprite2D" parent="."]
+position = Vector2(637.5, 353.5)
+scale = Vector2(10.1172, 5.66406)
+texture = ExtResource("2_xjilc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 468.0
+offset_top = 312.0
+offset_right = 1968.0
+offset_bottom = 712.0
+scale = Vector2(0.25, 0.25)
+alignment = 1
+
+[node name="botonStart" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "Start Game"
+
+[node name="botonQuit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 80
+text = "Quit"
+
+[node name="AudioPlay" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6nls7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 946.0
+offset_top = 393.0
+offset_right = 2946.0
+offset_bottom = 1113.0
+color = Color(0, 0, 0, 0.482353)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 977.0
+offset_top = 418.0
+offset_right = 3045.0
+offset_bottom = 2056.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.199746, 0.213534)
+theme_override_font_sizes/normal_font_size = 150
+text = "Controls:
+	Move arrow keys
+	\"P\" to pause
+	\"Z\" to dash
+	\"X\" to atack
+	\"Space\" to zoom
+"
+fit_content = true
+scroll_active = false
+
+[connection signal="pressed" from="VBoxContainer/botonStart" to="." method="_on_boton_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/botonQuit" to="." method="_on_boton_quit_pressed"]

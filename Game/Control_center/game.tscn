@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctw3ns1tfersr"]
+
+[ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Game/UI/menu_paused.tscn" id="1_p8csk"]
+[ext_resource type="PackedScene" uid="uid://bk4l8g54uw2j8" path="res://Game/UI/menu.tscn" id="3_8bq47"]
+[ext_resource type="PackedScene" uid="uid://d3i2eq8y1xx1b" path="res://Game/Niveles/World1/World1.tscn" id="3_qv4jg"]
+[ext_resource type="Script" path="res://Componentes/Worlds/ChangeWorld.gd" id="4_jnwuk"]
+[ext_resource type="Script" path="res://Componentes/StateMachine.gd" id="4_vd6ia"]
+[ext_resource type="Script" path="res://Game/UI/MainMenu.gd" id="5_ctju7"]
+[ext_resource type="Script" path="res://Game/UI/MenuPaused.gd" id="7_gdcfp"]
+[ext_resource type="Script" path="res://Game/Control_center/GameOver.gd" id="8_578rg"]
+
+[node name="Game" type="Node2D"]
+
+[node name="MenuPaused" parent="." instance=ExtResource("1_p8csk")]
+
+[node name="World1" parent="." instance=ExtResource("3_qv4jg")]
+visible = false
+
+[node name="Menu" parent="." instance=ExtResource("3_8bq47")]
+
+[node name="GameStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_vd6ia")
+initial_state = NodePath("MainMenu")
+
+[node name="MainMenu" type="Node" parent="GameStateMachine"]
+script = ExtResource("5_ctju7")
+
+[node name="ChangeWorld" type="Node" parent="GameStateMachine"]
+script = ExtResource("4_jnwuk")
+
+[node name="MenuPaused" type="Node" parent="GameStateMachine"]
+script = ExtResource("7_gdcfp")
+
+[node name="GameOver" type="Node" parent="GameStateMachine"]
+script = ExtResource("8_578rg")

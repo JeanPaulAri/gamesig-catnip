@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cokj7sefj7wkx"]
+
+[ext_resource type="Script" path="res://Componentes/Entidades/VidaComponente.gd" id="1_sig0m"]
+
+[node name="VidaComponente" type="Node2D"]
+script = ExtResource("1_sig0m")
+
+[node name="HitStun" type="Timer" parent="."]
+wait_time = 0.504
