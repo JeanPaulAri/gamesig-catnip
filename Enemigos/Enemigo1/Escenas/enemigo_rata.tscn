@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cmsuk6a2w8ein"]
+[gd_scene load_steps=26 format=3 uid="uid://cmsuk6a2w8ein"]
 
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/Enemigo_Rata.gd" id="1_2fp4r"]
 [ext_resource type="Texture2D" uid="uid://bpdoxa4m23o1k" path="res://Assets/Player/walk and idle.png" id="2_5egyy"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cokj7sefj7wkx" path="res://Componentes/Entidades/vida_componente.tscn" id="5_sb2iu"]
 [ext_resource type="PackedScene" uid="uid://cn5spaa1ntxby" path="res://Componentes/state_machine.tscn" id="6_wl1ag"]
 [ext_resource type="PackedScene" uid="uid://8tradctbhcyf" path="res://Enemigos/Enemigo1/Escenas/path_find_state.tscn" id="7_7vlt8"]
+[ext_resource type="PackedScene" uid="uid://cf50734basigr" path="res://Componentes/Entidades/dead_state.tscn" id="7_xscnu"]
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/EnemyRatAttack.gd" id="8_1b4ok"]
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/EnemyRatIdle.gd" id="9_g5g42"]
+[ext_resource type="Script" path="res://Componentes/Entidades/CatNipDrop.gd" id="10_bm057"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8cd4"]
 size = Vector2(73.7024, 112.543)
@@ -261,6 +263,13 @@ shape = SubResource("RectangleShape2D_vxw1r")
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("6_wl1ag")]
 initial_state = NodePath("EnemyRatIdle")
 
+[node name="DeadState" parent="StateMachine" node_paths=PackedStringArray("WalkSprite", "IdleSprite", "AttackSprite", "DeadSprite", "Machine") instance=ExtResource("7_xscnu")]
+WalkSprite = NodePath("../../Movement")
+IdleSprite = NodePath("../../Movement")
+AttackSprite = NodePath("../../Attack")
+DeadSprite = NodePath("../../Muerto")
+Machine = NodePath("..")
+
 [node name="PathFindComponent" parent="StateMachine" node_paths=PackedStringArray("enemy", "WalkSprite", "AttackSprite", "AnimationEn") instance=ExtResource("7_7vlt8")]
 enemy = NodePath("../..")
 move_speed = 100.0
@@ -286,5 +295,11 @@ script = ExtResource("9_g5g42")
 PlayerAnimation = NodePath("../../AnimationPlayer")
 enemy = NodePath("../..")
 
+[node name="CatNipDrop" type="Marker2D" parent="."]
+position = Vector2(-56.1982, -31.6506)
+script = ExtResource("10_bm057")
+
+[connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
+[connection signal="DeadPlayer" from="VidaComponente" to="CatNipDrop" method="_on_vida_componente_dead_player"]
 [connection signal="area_entered" from="StateMachine/EnemyRatAttack/EnemyRatAttackHitbox" to="StateMachine/EnemyRatAttack" method="_on_enemy_rat_attack_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/EnemyRatAttack/EnemyRatAttackTimer" to="StateMachine/EnemyRatAttack" method="_on_enemy_rat_attack_timer_timeout"]

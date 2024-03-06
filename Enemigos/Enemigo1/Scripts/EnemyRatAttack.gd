@@ -17,7 +17,6 @@ func Update(_delta: float):
 	pass
 
 func _on_enemy_rat_attack_hitbox_area_entered(area):
-	print("Enemigo ataca")
 	if area is HitboxComponente:
 		var attack=Attack.new()
 		attack.attack_damage=attack_damage
@@ -27,5 +26,4 @@ func _on_enemy_rat_attack_hitbox_area_entered(area):
 
 
 func _on_enemy_rat_attack_timer_timeout():
-	print("change attack")
 	Transitioned.emit(self,"PathFindComponent")

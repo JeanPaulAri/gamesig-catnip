@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
 @export var instanceExample: PackedScene
+var Ability_points:int
+signal Abilities(Ability_points)
+
+func _ready():
+	Ability_points=0
+
 func _physics_process(delta):
 	move_and_slide()
 	pass
@@ -12,8 +18,11 @@ func _input(event: InputEvent) -> void:
 				var instance = instanceExample.instantiate()
 				add_sibling(instance)
 				instance.global_position = get_global_mouse_position()
-				
-				
+
+func _get_catNip():
+	Ability_points+=1
+	print("Got some catNip")
+	emit_signal("Abilities",Ability_points)
 
 '''
 const LIMIT_Y = 500
