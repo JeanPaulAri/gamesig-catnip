@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bk4l8g54uw2j8"]
 
-[ext_resource type="Script" path="res://Game/Control_center/menuScript.gd" id="1_avtgi"]
+[ext_resource type="Script" path="res://Game/UI/Scripts/menuScript.gd" id="1_avtgi"]
 [ext_resource type="Texture2D" uid="uid://08ya0cfb5sk0" path="res://Assets/FAVICON.png" id="2_xjilc"]
 [ext_resource type="AudioStream" uid="uid://cvupaus3ultc7" path="res://Sounds/aceptar.wav" id="3_6nls7"]
 
@@ -33,6 +33,10 @@ theme_override_font_sizes/font_size = 80
 text = "Quit"
 
 [node name="AudioPlay" type="AudioStreamPlayer" parent="."]
+process_mode = 4
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 stream = ExtResource("3_6nls7")
 
 [node name="ColorRect" type="ColorRect" parent="."]

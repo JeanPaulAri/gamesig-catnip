@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://owkstsoupg67"]
+
+[ext_resource type="Script" path="res://Game/UI/Scripts/LoadWorldState.gd" id="1_uhicj"]
+
+[node name="LoadWorld" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uhicj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1156.0
+offset_bottom = 664.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 514.0
+offset_top = 252.0
+offset_right = 1582.0
+offset_bottom = 772.0
+scale = Vector2(0.25, 0.25)
+theme_override_colors/default_color = Color(0.992157, 0.992157, 0.992157, 1)
+theme_override_colors/font_selected_color = Color(0.988235, 0.988235, 0.988235, 1)
+theme_override_font_sizes/normal_font_size = 300
