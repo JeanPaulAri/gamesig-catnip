@@ -29,7 +29,7 @@ func _ready():
 	self.strength = Global.strength
 	self.agility= Global.agility
 	self.aim= Global.aim
-  Ability_points=0
+	Ability_points=0
 
 
 func _get_catNip():

@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3i2eq8y1xx1b"]
+[gd_scene load_steps=13 format=3 uid="uid://csujvcak8eleo"]
 
 [ext_resource type="Script" path="res://Game/Niveles/World1/Scripts/World.gd" id="1_ajn51"]
 [ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Game/UI/Scenes/menu_paused.tscn" id="2_blytc"]
 [ext_resource type="PackedScene" uid="uid://d4aye30taop7c" path="res://Game/Niveles/World1/Escenas/background.tscn" id="2_dvt14"]
 [ext_resource type="Texture2D" uid="uid://ewbu1qcafjt1" path="res://Assets/Map/Tileset.png" id="3_p0fs2"]
-[ext_resource type="PackedScene" uid="uid://dd3nm45u2oioq" path="res://Player/Escenas/Player.tscn" id="4_r5ihh"]
-[ext_resource type="PackedScene" uid="uid://bh1f8lfqat3e2" path="res://Game/Niveles/World1/Escenas/MovingPlatform.tscn" id="6_2wgwi"]
+[ext_resource type="PackedScene" uid="uid://bkd45842mwucg" path="res://Player/Escenas/Player.tscn" id="4_r5ihh"]
+[ext_resource type="PackedScene" path="res://Game/Niveles/World1/Escenas/MovingPlatform.tscn" id="6_2wgwi"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="6_upgui"]
-[ext_resource type="PackedScene" uid="uid://bub02t6g6btch" path="res://Componentes/Worlds/check_point.tscn" id="7_5ypdl"]
-[ext_resource type="PackedScene" uid="uid://dfllqldp6px2k" path="res://Componentes/Worlds/enemy_temp.tscn" id="8_1jv7x"]
+[ext_resource type="PackedScene" path="res://Componentes/Worlds/check_point.tscn" id="7_5ypdl"]
+[ext_resource type="PackedScene" path="res://Componentes/Worlds/enemy_temp.tscn" id="8_1jv7x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_erkjh"]
 texture = ExtResource("3_p0fs2")
