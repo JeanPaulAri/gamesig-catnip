@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dw234wy7bm6a1"]
+[gd_scene load_steps=30 format=3 uid="uid://dw234wy7bm6a1"]
 
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss.gd" id="1_py4en"]
 [ext_resource type="Texture2D" uid="uid://bahf8yu2l6ydv" path="res://Assets/Boss/Crystal Knigth.png" id="2_i6twb"]
@@ -14,7 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://cb2kgnwndyg8o" path="res://Bosses/Boss1/Escenas/golpe_boss_1.tscn" id="12_5mkur"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/TuringMachineAI.gd" id="13_nu5jp"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_idle.gd" id="14_v6wah"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_attack1.gd" id="15_n1tww"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss1_attack1.gd" id="15_uge1c"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss1_attack2.gd" id="16_3umlh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlr7"]
 radius = 21.25
@@ -412,7 +413,10 @@ script = ExtResource("13_nu5jp")
 script = ExtResource("14_v6wah")
 
 [node name="attack1" type="Node" parent="TuringMachineAI"]
-script = ExtResource("15_n1tww")
+script = ExtResource("15_uge1c")
+
+[node name="attack2" type="Node" parent="TuringMachineAI"]
+script = ExtResource("16_3umlh")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="PlayerDetection" to="Turing M/idle" method="_on_player_detection_body_entered"]

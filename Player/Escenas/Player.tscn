@@ -9,9 +9,9 @@
 [ext_resource type="Script" path="res://Player/Scripts/PlayerIdle.gd" id="9_c0tqk"]
 [ext_resource type="PackedScene" uid="uid://cokj7sefj7wkx" path="res://Componentes/Entidades/vida_componente.tscn" id="10_eneoy"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerMovement.gd" id="10_wxkak"]
+[ext_resource type="PackedScene" uid="uid://cf50734basigr" path="res://Componentes/Entidades/dead_state.tscn" id="11_51ldr"]
 [ext_resource type="PackedScene" uid="uid://bv7eo77rlfpxt" path="res://Componentes/Entidades/hitbox_componente.tscn" id="11_cvibm"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerAttack.gd" id="11_egx8t"]
-[ext_resource type="Script" path="res://Player/Scripts/PlayerDead.gd" id="12_jstyb"]
 
 [sub_resource type="Animation" id="Animation_koxmt"]
 resource_name = "AttackLeft"
@@ -405,7 +405,7 @@ size = Vector2(2.3, 1.9)
 size = Vector2(15.3, 14.85)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjy7y"]
-size = Vector2(13.3, 13.35)
+size = Vector2(16.9, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c38kp"]
 size = Vector2(4.8, 14.05)
@@ -447,7 +447,7 @@ texture = ExtResource("3_f18hk")
 centered = false
 hframes = 5
 vframes = 5
-frame = 16
+frame = 15
 
 [node name="Muerto" type="Sprite2D" parent="."]
 visible = false
@@ -484,6 +484,7 @@ position = Vector2(-0.999999, -1.5)
 shape = SubResource("RectangleShape2D_n2j0g")
 
 [node name="VidaComponente" parent="." instance=ExtResource("10_eneoy")]
+MAX_VIDA = 10000.0
 
 [node name="HitboxComponente" parent="." node_paths=PackedStringArray("vida_componente") instance=ExtResource("11_cvibm")]
 vida_componente = NodePath("../VidaComponente")
@@ -493,7 +494,8 @@ position = Vector2(-0.6, -1.3)
 shape = SubResource("RectangleShape2D_78lfj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.150002, -0.975001)
+position = Vector2(-1.05, -1.2)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_xjy7y")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("6_soeu2")]
@@ -527,9 +529,14 @@ disabled = true
 [node name="AttackClawTimer" type="Timer" parent="StateMachine/PlayerAttackClaw"]
 one_shot = true
 
-[node name="PlayerDead" type="Node2D" parent="StateMachine"]
-script = ExtResource("12_jstyb")
+[node name="DeadState" parent="StateMachine" node_paths=PackedStringArray("WalkSprite", "IdleSprite", "AttackSprite", "DeadSprite", "Machine") instance=ExtResource("11_51ldr")]
+WalkSprite = NodePath("../../WalkSprites")
+IdleSprite = NodePath("../../IdleSprites")
+AttackSprite = NodePath("../../Attack(temporal)")
+DeadSprite = NodePath("../../Muerto")
+Machine = NodePath("..")
 
+[connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
 [connection signal="direction" from="StateMachine/PlayerMovement" to="StateMachine/PlayerIdle" method="_on_player_movement_direction"]
 [connection signal="direction" from="StateMachine/PlayerMovement" to="StateMachine/PlayerDash" method="_on_player_movement_direction"]
 [connection signal="area_entered" from="StateMachine/PlayerAttackClaw/AttackClawHitbox" to="StateMachine/PlayerAttackClaw" method="_on_attack_claw_hitbox_area_entered"]
