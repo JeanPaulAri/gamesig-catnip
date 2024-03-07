@@ -36,7 +36,7 @@ func _process(_delta):
 
 '''Function called when an animation finishes (Set var to false and turing machine may change state)'''
 func _on_animation_player_animation_finished(anim_name):
-	print("\nAnimation: ", anim_name, " has finished\n")
+	#print("\nAnimation: ", anim_name, " has finished\n")
 	if anim_name not in animations.keys():
 		print("Not in keys")
 		return
