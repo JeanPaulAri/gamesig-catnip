@@ -12,7 +12,6 @@ var player: CharacterBody2D
 func Enter():
 	WalkSprite.visible=true
 	AttackSprite.visible=false
-	print("Enemigo en persecucion")
 	player=get_tree().get_first_node_in_group("Player")
 
 	
@@ -26,7 +25,6 @@ func Physics_Update(delta: float):
 		else:
 			WalkSprite.flip_h=true
 	if direction.length()<200:
-		print("Enemigo atacando")
 		WalkSprite.visible=false
 		AttackSprite.visible=true
 		Transitioned.emit(self,"EnemyRatAttack")
