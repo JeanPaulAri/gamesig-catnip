@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cb2kgnwndyg8o" path="res://Bosses/Boss1/Escenas/golpe_boss_1.tscn" id="12_5mkur"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/TuringMachineAI.gd" id="13_nu5jp"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_idle.gd" id="14_v6wah"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss1_attack1.gd" id="15_uge1c"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_attack1.gd" id="15_uge1c"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss1_attack2.gd" id="16_3umlh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlr7"]
