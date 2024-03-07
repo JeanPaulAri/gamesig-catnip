@@ -21,6 +21,7 @@ func _ready():
 	
 	
 func _process(delta):
+	#print(current_state.name)
 	if current_state:
 		current_state.Update(delta)
 

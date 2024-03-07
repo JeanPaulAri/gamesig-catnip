@@ -1,15 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://cww1rgfsnq64k"]
+[gd_scene load_steps=11 format=3 uid="uid://b3u7ntxxjsnex"]
 
-[ext_resource type="Script" path="res://Game/Niveles/World1/World.gd" id="1_cxi5l"]
-[ext_resource type="PackedScene" uid="uid://d4aye30taop7c" path="res://Game/Niveles/World1/Escenas/background.tscn" id="2_nr46d"]
-[ext_resource type="Texture2D" uid="uid://ewbu1qcafjt1" path="res://Assets/Map/Tileset.png" id="3_ajgre"]
-[ext_resource type="PackedScene" uid="uid://bkd45842mwucg" path="res://Player/Escenas/Player.tscn" id="4_u5f2q"]
-[ext_resource type="PackedScene" uid="uid://cmsuk6a2w8ein" path="res://Enemigos/Enemigo1/Escenas/enemigo_rata.tscn" id="5_kd6m5"]
-[ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="6_4fdlr"]
-[ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Game/UI/menu_paused.tscn" id="7_biem6"]
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_fiur6"]
+[ext_resource type="PackedScene" uid="uid://d4aye30taop7c" path="res://Scenes/background.tscn" id="2_u3gfh"]
+[ext_resource type="Texture2D" uid="uid://ewbu1qcafjt1" path="res://Assets/Map/Tileset.png" id="3_mmdh1"]
+[ext_resource type="PackedScene" uid="uid://dd3nm45u2oioq" path="res://Scenes/Player.tscn" id="4_nbpvk"]
+[ext_resource type="PackedScene" uid="uid://cmsuk6a2w8ein" path="res://Scenes/enemigo_rata.tscn" id="5_fflmq"]
+[ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Scenes/dash.tscn" id="6_elig8"]
+[ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Scenes/UI/menu_paused.tscn" id="7_fnuum"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_erkjh"]
-texture = ExtResource("3_ajgre")
+texture = ExtResource("3_mmdh1")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
@@ -333,10 +333,10 @@ sources/0 = SubResource("TileSetAtlasSource_erkjh")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cqrbt"]
 size = Vector2(525.5, 903.75)
 
-[node name="World2" type="Node2D"]
-script = ExtResource("1_cxi5l")
+[node name="World" type="Node2D"]
+script = ExtResource("1_fiur6")
 
-[node name="Background" parent="." instance=ExtResource("2_nr46d")]
+[node name="Background" parent="." instance=ExtResource("2_u3gfh")]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-0.00012207, 1.81899e-12)
@@ -344,8 +344,8 @@ tile_set = SubResource("TileSet_lx6kb")
 format = 2
 layer_0/tile_data = PackedInt32Array(2883631, 524288, 9)
 
-[node name="Player" parent="TileMap" instance=ExtResource("4_u5f2q")]
-position = Vector2(225, 572)
+[node name="Player" parent="TileMap" instance=ExtResource("4_nbpvk")]
+position = Vector2(236, 456)
 scale = Vector2(6.89078, 7.60121)
 
 [node name="Area2D" type="Area2D" parent="TileMap"]
@@ -356,13 +356,13 @@ collision_mask = 5
 position = Vector2(952, 472)
 shape = SubResource("RectangleShape2D_cqrbt")
 
-[node name="Enemigo_Rata" parent="TileMap" groups=["enemy"] instance=ExtResource("5_kd6m5")]
-position = Vector2(519, 534)
+[node name="Enemigo_Rata" parent="TileMap" groups=["enemy"] instance=ExtResource("5_fflmq")]
+position = Vector2(1471, 456)
 scale = Vector2(1.4, 1.4)
 
-[node name="Dash" parent="TileMap" instance=ExtResource("6_4fdlr")]
+[node name="Dash" parent="TileMap" instance=ExtResource("6_elig8")]
 
-[node name="MenuPaused" parent="." instance=ExtResource("7_biem6")]
+[node name="MenuPaused" parent="." instance=ExtResource("7_fnuum")]
 offset_right = 0.0
 offset_bottom = 0.0
 

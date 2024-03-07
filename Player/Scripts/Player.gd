@@ -1,23 +1,36 @@
 extends CharacterBody2D
 
 @export var instanceExample: PackedScene
+
+
+
+@export var strength: int = 0
+@export var agility: int = 0
+@export var aim: int = 0
+
 var Ability_points:int
 signal Abilities(Ability_points)
-
-func _ready():
-	Ability_points=0
-
 func _physics_process(delta):
 	move_and_slide()
+	
 	pass
 
 func _input(event: InputEvent) -> void:
-	if(event is InputEventMouseButton):
+	if(event is InputEventMouseButton and get_tree().current_scene.name == "World"):
 		if(event.button_index == MOUSE_BUTTON_LEFT):
 			if(event.pressed):
 				var instance = instanceExample.instantiate()
 				add_sibling(instance)
 				instance.global_position = get_global_mouse_position()
+
+				
+func _ready():
+	self.position = Global.spawnPoint
+	self.strength = Global.strength
+	self.agility= Global.agility
+	self.aim= Global.aim
+  Ability_points=0
+
 
 func _get_catNip():
 	Ability_points+=1
