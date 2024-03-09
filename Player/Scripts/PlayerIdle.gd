@@ -6,7 +6,7 @@ class_name PlayerIdle
 @onready var IdleSprite:=$"../../IdleSprites"
 @onready var AttackSprite:=$"../../Attack(temporal)"
 @onready var DeadSprite:=$"../../Muerto"
-var direction_x=1
+var direction_x=0
 
 func Enter():
 	if(direction_x == 1):
@@ -32,7 +32,9 @@ func Update(_delta: float):
 		AttackSprite.visible=true
 		DeadSprite.visible=false
 		Transitioned.emit(self,"PlayerAttackClaw")
-
+	if Input.is_action_just_pressed("PlayerProyectil"):
+		print("PROYEC")
+		Transitioned.emit(self,"PlayerProyectile")
 
 func _on_player_movement_direction(dir):
 	direction_x=dir
