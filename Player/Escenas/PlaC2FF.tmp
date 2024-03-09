@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bkd45842mwucg"]
+[gd_scene load_steps=35 format=3 uid="uid://bkd45842mwucg"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_8jisa"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="2_fb4lv"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://cf50734basigr" path="res://Componentes/Entidades/dead_state.tscn" id="11_51ldr"]
 [ext_resource type="PackedScene" uid="uid://bv7eo77rlfpxt" path="res://Componentes/Entidades/hitbox_componente.tscn" id="11_cvibm"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerAttack.gd" id="11_egx8t"]
-[ext_resource type="Script" path="res://Player/Scripts/PlayerProyectile.gd" id="12_hkbtk"]
 
 [sub_resource type="Animation" id="Animation_koxmt"]
 resource_name = "AttackLeft"
@@ -536,17 +535,8 @@ AttackSprite = NodePath("../../Attack(temporal)")
 DeadSprite = NodePath("../../Muerto")
 Machine = NodePath("..")
 
-[node name="PlayerProyectile" type="Node2D" parent="StateMachine"]
-script = ExtResource("12_hkbtk")
-
-[node name="Bulletposition" type="Marker2D" parent="StateMachine/PlayerProyectile"]
-position = Vector2(11.1, -0.8)
-scale = Vector2(1, 1)
-
 [connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
 [connection signal="direction" from="StateMachine/PlayerMovement" to="StateMachine/PlayerIdle" method="_on_player_movement_direction"]
 [connection signal="direction" from="StateMachine/PlayerMovement" to="StateMachine/PlayerDash" method="_on_player_movement_direction"]
-[connection signal="direction" from="StateMachine/PlayerMovement" to="StateMachine/PlayerAttackClaw" method="_on_player_movement_direction"]
-[connection signal="direction" from="StateMachine/PlayerMovement" to="StateMachine/PlayerProyectile" method="_on_player_movement_direction"]
 [connection signal="area_entered" from="StateMachine/PlayerAttackClaw/AttackClawHitbox" to="StateMachine/PlayerAttackClaw" method="_on_attack_claw_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/PlayerAttackClaw/AttackClawTimer" to="StateMachine/PlayerAttackClaw" method="_on_attack_claw_timer_timeout"]
