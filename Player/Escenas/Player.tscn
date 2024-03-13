@@ -460,7 +460,6 @@ frame = 8
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = 1.05069
 scale = Vector2(-331.085, 312.074)
-enabled = false
 limit_left = 0
 limit_top = 0
 limit_bottom = 720
@@ -495,7 +494,6 @@ shape = SubResource("RectangleShape2D_78lfj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.05, -1.2)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_xjy7y")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("6_soeu2")]
