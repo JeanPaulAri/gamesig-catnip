@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba40047iccec0"]
+
+[ext_resource type="Script" path="res://Componentes/Entidades/proyectil_component.gd" id="1_g45mb"]
+[ext_resource type="Texture2D" uid="uid://d1x4qo520c22g" path="res://icon.svg" id="1_qupwg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioltd"]
+size = Vector2(124, 122)
+
+[node name="ProyectilComponent" type="Area2D"]
+script = ExtResource("1_g45mb")
+
+[node name="ProyectilSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_qupwg")
+
+[node name="ProyectilCollider" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_ioltd")
+
+[node name="ProyectileVisibility" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="ProyectileVisibility" to="." method="_on_proyectile_visibility_screen_exited"]

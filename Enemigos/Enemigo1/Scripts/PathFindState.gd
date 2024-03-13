@@ -19,7 +19,7 @@ func Physics_Update(delta: float):
 	var direction = player.global_position-enemy.global_position
 	AnimationEn.play("WalkRight")
 	if direction.length()>200:
-		enemy.position += ((player.position+Vector2(5,5))-enemy.position)/move_speed
+		enemy.position.x += ((player.position.x+5)-enemy.position.x)/move_speed
 		if (player.position.x+5)-enemy.position.x>SpriteSize:
 			WalkSprite.flip_h=false
 		else:

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Game/UI/Scenes/menu_paused.tscn" id="2_blytc"]
 [ext_resource type="PackedScene" uid="uid://d4aye30taop7c" path="res://Game/Niveles/World1/Escenas/background.tscn" id="2_dvt14"]
 [ext_resource type="Texture2D" uid="uid://ewbu1qcafjt1" path="res://Assets/Map/Tileset.png" id="3_p0fs2"]
-[ext_resource type="PackedScene" uid="uid://dd3nm45u2oioq" path="res://Player/Escenas/Player.tscn" id="4_r5ihh"]
+[ext_resource type="PackedScene" uid="uid://bkd45842mwucg" path="res://Player/Escenas/Player.tscn" id="4_r5ihh"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="6_upgui"]
 [ext_resource type="PackedScene" uid="uid://bfjtoho6fuo5f" path="res://Game/UI/Scenes/text_balloon.tscn" id="7_g7hvc"]
 
@@ -336,7 +336,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(1114115, 131072, 2, 1179651, 131072, 2, 1245187, 131072, 2, 1310723, 131072, 2, 1376259, 131072, 2, 1441795, 131072, 2, 1507331, 131072, 2, 1572867, 131072, 2, 1638403, 131072, 2, 1703939, 131072, 2, 1769475, 131072, 2, 1835011, 131072, 2, 1900547, 131072, 2, 1966083, 131072, 2, 2031619, 131072, 2, 2031620, 131072, 2, 2031621, 131072, 2, 2031622, 131072, 2, 2031623, 131072, 2, 2031624, 131072, 2, 2031625, 131072, 2, 2031626, 131072, 2, 2031627, 131072, 2, 2031628, 131072, 2, 2031629, 131072, 2, 2031630, 131072, 2, 2031631, 131072, 2, 2031632, 131072, 2, 2031633, 131072, 2, 2031634, 131072, 2, 2031635, 131072, 2, 2031636, 131072, 2)
 
 [node name="Player" parent="TileMap" instance=ExtResource("4_r5ihh")]
-position = Vector2(261, 443)
+position = Vector2(192, 552)
 scale = Vector2(6.89078, 7.60121)
 
 [node name="Dash" parent="TileMap" instance=ExtResource("6_upgui")]

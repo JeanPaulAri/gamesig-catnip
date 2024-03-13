@@ -12,7 +12,6 @@ var Ability_points:int
 signal Abilities(Ability_points)
 func _physics_process(delta):
 	move_and_slide()
-	
 	pass
 
 func _input(event: InputEvent) -> void:
