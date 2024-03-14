@@ -24,7 +24,8 @@ func _input(event: InputEvent) -> void:
 
 				
 func _ready():
-	self.position = Global.spawnPoint
+	if(Global.spawnPoint.x != 0 and Global.spawnPoint.y != 0):
+		self.position = Global.spawnPoint
 	self.strength = Global.strength
 	self.agility= Global.agility
 	self.aim= Global.aim

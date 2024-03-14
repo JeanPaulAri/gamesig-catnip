@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://oiqfphwkc1ub"]
+
+[ext_resource type="Texture2D" uid="uid://dppeof3ex5vtc" path="res://Assets/Map/TestPlatform.png" id="1_atij3"]
+[ext_resource type="Script" path="res://Game/Niveles/World1/Scripts/break_plattform.gd" id="1_fjem4"]
+
+[sub_resource type="Animation" id="Animation_4vd27"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mqdec"]
+resource_name = "Tuerca"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_edi7d"]
+_data = {
+"RESET": SubResource("Animation_4vd27"),
+"Tuerca": SubResource("Animation_mqdec")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mclns"]
+size = Vector2(29.7285, 0.408314)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3a5ov"]
+size = Vector2(29.2, 2.61919)
+
+[node name="BreakPlattform" type="Node2D"]
+scale = Vector2(5, 5.013)
+script = ExtResource("1_fjem4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_atij3")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_edi7d")
+}
+autoplay = "Tuerca"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.6, -1.39637)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_mclns")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.2, 0.685219)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_3a5ov")
+one_way_collision = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -60,41 +60,35 @@ _data = {
 "RESET": SubResource("Animation_32jql")
 }
 
-[node name="textBalloon" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="textBalloon" type="Area2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_yd814")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(102, 456)
+shape = SubResource("RectangleShape2D_bx5m4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.23911
 texture = ExtResource("1_phnof")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
-offset_left = -384.293
-offset_top = -22.6286
-offset_right = 2934.71
-offset_bottom = 1879.37
+offset_left = -426.611
+offset_top = -44.2205
+offset_right = 2892.39
+offset_bottom = 726.78
 rotation = -0.244346
 scale = Vector2(0.25, 0.25)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 500
+bbcode_enabled = true
 text = "Press Space"
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(102, 456)
-shape = SubResource("RectangleShape2D_bx5m4")
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_dk1ah")
 }
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

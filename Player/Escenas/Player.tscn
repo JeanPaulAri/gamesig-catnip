@@ -459,9 +459,7 @@ frame = 8
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = 1.05069
 scale = Vector2(-331.085, 312.074)
-limit_left = 0
-limit_top = 0
-limit_bottom = 720
+enabled = false
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
@@ -541,7 +539,6 @@ script = ExtResource("12_hkbtk")
 
 [node name="Bulletposition" type="Marker2D" parent="StateMachine/PlayerProyectile"]
 position = Vector2(11.1, -0.8)
-scale = Vector2(1, 1)
 
 [connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
 [connection signal="direction" from="StateMachine/PlayerMovement" to="StateMachine/PlayerIdle" method="_on_player_movement_direction"]
