@@ -18,20 +18,20 @@ func _ready():
 			child.Transitioned.connect(updateState) # Connect signal from every state to updateState method
 	
 	'''Set prev and current state vars to idle (Every Boss/Enemie must have idle state. If not, we may need a "Null" state or something)'''
-	current_state = stateDic['idle']
-	previous_state = stateDic['idle']
+	current_state = stateDic['spawn']
+	previous_state = stateDic['spawn']
 	current_state.Enter()
 	
 
 '''Function that updates the previous and current state globals'''
 func updateState(newState : String):
 	
-	print("New State: ", newState)
+	print("Boss New State: ", newState)
 	
 	# Do nothing if is the same state (Not required if we code everything right :D)
 	if current_state.name == newState:
 		print("Same State!")
-		return
+		#return
 	
 	# Debug: Check if state exists (Not required if we code everything right :D)
 	if newState not in stateDic.keys():

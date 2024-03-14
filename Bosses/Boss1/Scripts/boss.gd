@@ -2,6 +2,14 @@ extends CharacterBody2D
 
 #@onready var player = find_node('Player')
 @onready var sprite = $Sprite2D
+@onready var healtBar = $CanvasLayer/ProgressBar
+@onready var phase = 1
+@onready var max_X:int
+@onready var min_X:int
+@onready var offset:int = 200
+
+
+@export var vidaComponent:VidaComponente
 var player
 
 var direction : Vector2
@@ -9,12 +17,20 @@ var dmg = 50
 var HP = 50*16
 
 '''Animation global vars to know if an animation has finished'''
-var animations = {'Idle': false, 'Attack Right': false, 'Beam': false}
+var animations = {'Idle': false, 'Dash': false, 'Attack Right': false, 'Beam': false}
 
 
 func _ready():
-	set_physics_process(false) # Physisc are processed on TM AI states
 	player = find_player(get_tree().get_root())
+	
+	'''Get the limits of the level (In order to know when boss dash should finish)'''
+	max_X = global_position.x
+	min_X = global_position.x - get_viewport().content_scale_size.x + offset
+	print("X: ", min_X," ",  max_X)
+	
+	'''Flip Sprites (boos spawns at right and should see to the left)'''	
+	$Sprite2D.flip_h = true
+
 
 func find_player(node):
 	# Check if the current node is the player node
@@ -32,6 +48,10 @@ func _process(_delta):
 	#direction = player.position - position
 	#sprite.flip_h = direction.x<0 # Flip sprites towards player
 	pass
+	
+func _physics_process(delta):
+	'''Update HealtBar'''
+	healtBar.value = float(vidaComponent.vida * 100 / vidaComponent.MAX_VIDA)
 	
 
 '''Function called when an animation finishes (Set var to false and turing machine may change state)'''

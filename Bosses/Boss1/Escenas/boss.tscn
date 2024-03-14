@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dw234wy7bm6a1"]
+[gd_scene load_steps=34 format=3 uid="uid://dw234wy7bm6a1"]
 
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss.gd" id="1_py4en"]
 [ext_resource type="Texture2D" uid="uid://bahf8yu2l6ydv" path="res://Assets/Boss/Crystal Knigth.png" id="2_i6twb"]
@@ -11,11 +11,15 @@
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Attack_Left.gd" id="8_r802k"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Beam.gd" id="9_6678r"]
 [ext_resource type="PackedScene" uid="uid://bv7eo77rlfpxt" path="res://Componentes/Entidades/hitbox_componente.tscn" id="11_oip8m"]
+[ext_resource type="Script" path="res://Componentes/Entidades/VidaComponente.gd" id="11_yudui"]
 [ext_resource type="PackedScene" uid="uid://cb2kgnwndyg8o" path="res://Bosses/Boss1/Escenas/golpe_boss_1.tscn" id="12_5mkur"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/TuringMachineAI.gd" id="13_nu5jp"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_idle.gd" id="14_v6wah"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_attack1.gd" id="15_uge1c"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss1_attack2.gd" id="16_3umlh"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/spawn.gd" id="18_mndmt"]
+[ext_resource type="Script" path="res://Bosses/Boss1/dash.gd" id="19_4ab8f"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/stunned.gd" id="20_d50bk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlr7"]
 radius = 21.25
@@ -278,11 +282,12 @@ radius = 116.017
 radius = 43.5
 height = 125.0
 
-[node name="boss" type="CharacterBody2D"]
+[node name="boss" type="CharacterBody2D" node_paths=PackedStringArray("vidaComponent")]
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_py4en")
+vidaComponent = NodePath("VidaComponente")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3.5, 2)
@@ -397,8 +402,14 @@ script = ExtResource("8_r802k")
 [node name="Attack_Right" type="Node2D" parent="Turing M"]
 script = ExtResource("4_raan0")
 
-[node name="HitboxComponente" parent="." instance=ExtResource("11_oip8m")]
+[node name="VidaComponente" type="Node2D" parent="."]
 position = Vector2(-109.776, -124.319)
+script = ExtResource("11_yudui")
+MAX_VIDA = 1000.0
+
+[node name="HitboxComponente" parent="." node_paths=PackedStringArray("vida_componente") instance=ExtResource("11_oip8m")]
+position = Vector2(-109.776, -124.319)
+vida_componente = NodePath("../VidaComponente")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponente"]
 position = Vector2(111.276, 123.319)
@@ -418,5 +429,30 @@ script = ExtResource("15_uge1c")
 [node name="attack2" type="Node" parent="TuringMachineAI"]
 script = ExtResource("16_3umlh")
 
+[node name="spawn" type="Node" parent="TuringMachineAI"]
+script = ExtResource("18_mndmt")
+
+[node name="dash" type="Node" parent="TuringMachineAI"]
+script = ExtResource("19_4ab8f")
+
+[node name="stunned" type="Node" parent="TuringMachineAI"]
+script = ExtResource("20_d50bk")
+
+[node name="Timer" type="Timer" parent="TuringMachineAI/stunned"]
+wait_time = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -2.0
+offset_right = 154.0
+offset_bottom = 27.0
+grow_horizontal = 2
+value = 100.0
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="PlayerDetection" to="Turing M/idle" method="_on_player_detection_body_entered"]
+[connection signal="timeout" from="TuringMachineAI/stunned/Timer" to="TuringMachineAI/stunned" method="_on_timer_timeout"]
