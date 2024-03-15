@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bub02t6g6btch"]
+[gd_scene load_steps=4 format=3 uid="uid://b8se37u2nx3n2"]
 
 [ext_resource type="Script" path="res://Componentes/Worlds/CheckPoint.gd" id="1_eok8r"]
 [ext_resource type="Texture2D" uid="uid://d1x4qo520c22g" path="res://icon.svg" id="2_r5lcn"]

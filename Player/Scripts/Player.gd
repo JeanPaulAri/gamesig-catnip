@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 @export var instanceExample: PackedScene
 
-
-
 @export var strength: int = 0
 @export var agility: int = 0
 @export var aim: int = 0
@@ -35,7 +33,7 @@ func _ready():
 func _get_catNip():
 	Ability_points+=1
 	print("Got some catNip")
-	emit_signal("Abilities",Ability_points)
+	
 
 '''
 const LIMIT_Y = 500
