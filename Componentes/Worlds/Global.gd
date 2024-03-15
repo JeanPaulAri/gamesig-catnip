@@ -1,6 +1,6 @@
 extends Node
 
-var spawnPoint = Vector2(30,100)
+var spawnPoint = Vector2(0,0)
 var strength: int = 0
 var agility: int = 0
 var aim: int = 0

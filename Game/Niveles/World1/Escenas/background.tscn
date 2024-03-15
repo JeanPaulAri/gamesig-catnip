@@ -5,13 +5,23 @@
 [node name="Background" type="Node2D"]
 
 [node name="B1" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-640, 360)
 texture = ExtResource("1_w3kps")
 
 [node name="B2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(640, 360)
 texture = ExtResource("1_w3kps")
 
 [node name="B3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1920, 360)
 texture = ExtResource("1_w3kps")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8806.0
+offset_top = -8155.0
+offset_right = 33566.0
+offset_bottom = 14359.0
+color = Color(0, 0, 0, 1)

@@ -11,13 +11,18 @@ config_version=5
 [application]
 
 config/name="Cat-nip-Postreg"
-run/main_scene="res://Game/UI/Scenes/menu.tscn"
+run/main_scene="res://Game/Niveles/World1/Escenas/World1_RATANK_TEST_BOSS.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Componentes/Worlds/global.tscn"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [input]
 
