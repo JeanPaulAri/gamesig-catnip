@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 @export var instanceExample: PackedScene
 
-
-
 @export var strength: int = 0
 @export var agility: int = 0
 @export var aim: int = 0

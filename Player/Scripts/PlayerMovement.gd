@@ -15,6 +15,11 @@ class_name PlayerMovement
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_peak * jump_time_peak))*-1.0
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_descent * jump_time_descent))*-1.0
 
+func set_global(jump_h, jump_tp, jump_td):
+	jump_h=jump_height
+	jump_tp=jump_time_peak
+	jump_td=jump_time_descent
+
 func get_gravity()->float:
 	return jump_gravity if player.velocity.y < 0.0 else fall_gravity
 
@@ -41,8 +46,11 @@ func Update(_delta: float):
 		player.velocity.x = move_toward(player.velocity.x, 0, PlayerSpeed)
 	player.move_and_slide()
 	
+	if(Input.is_action_just_pressed("ataque")):
+		Transitioned.emit(self,"PlayerAttackClaw")
+	if Input.is_action_just_pressed("PlayerProyectil"):
+		Transitioned.emit(self,"PlayerProyectile")
 	if (not Input.is_anything_pressed() and player.is_on_floor()):
 		Transitioned.emit(self,"PlayerIdle")
-	
 	if Input.is_action_just_pressed("Dash") and !Dash.is_cooldown() and player.velocity.x!=0:
 		Transitioned.emit(self,"PlayerDash")
