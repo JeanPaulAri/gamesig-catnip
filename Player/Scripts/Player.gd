@@ -34,7 +34,7 @@ func _ready():
 func _get_catNip():
 	Ability_points+=1
 	print("Got some catNip")
-	emit_signal("Abilities",Ability_points)
+	
 
 '''
 const LIMIT_Y = 500

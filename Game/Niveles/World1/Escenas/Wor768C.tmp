@@ -346,6 +346,9 @@ position = Vector2(1772, 516)
 [node name="Player" parent="TileMap" instance=ExtResource("4_evqya")]
 position = Vector2(192, 552)
 scale = Vector2(6.89078, 7.60121)
+strength = 0
+agility = 0
+aim = 0
 
 [node name="Area2D" type="Area2D" parent="TileMap"]
 visible = false

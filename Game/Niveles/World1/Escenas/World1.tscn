@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bkd45842mwucg" path="res://Player/Escenas/Player.tscn" id="4_r5ihh"]
 [ext_resource type="PackedScene" uid="uid://pjjlhlqo38ss" path="res://Game/Niveles/World1/Escenas/MovingPlatform.tscn" id="6_2wgwi"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="6_upgui"]
-[ext_resource type="PackedScene" path="res://Componentes/Worlds/check_point.tscn" id="7_5ypdl"]
-[ext_resource type="PackedScene" path="res://Componentes/Worlds/enemy_temp.tscn" id="8_1jv7x"]
+[ext_resource type="PackedScene" uid="uid://b8se37u2nx3n2" path="res://Componentes/Worlds/check_point.tscn" id="7_5ypdl"]
+[ext_resource type="PackedScene" uid="uid://pxb5n1byrn8x" path="res://Componentes/Worlds/enemy_temp.tscn" id="8_1jv7x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_erkjh"]
 texture = ExtResource("3_p0fs2")
