@@ -3,15 +3,19 @@ extends CharacterBody2D
 #@onready var player = find_node('Player')
 @onready var sprite = $Sprite2D
 @onready var healtBar = $CanvasLayer/ProgressBar
-@onready var phase = 1
+@onready var phase = 1 # starting phase
+@onready var n_phases:int = 4
+@onready var life_phases = []
 @onready var max_X:int
 @onready var min_X:int
-@onready var offset:int = 200
-
+@onready var boss_width:int = 200
+@onready var player
 
 @export var vidaComponent:VidaComponente
-var player
 
+
+
+'''Deprecated Vars'''
 var direction : Vector2
 var dmg = 50
 var HP = 50*16
@@ -25,8 +29,16 @@ func _ready():
 	
 	'''Get the limits of the level (In order to know when boss dash should finish)'''
 	max_X = global_position.x
-	min_X = global_position.x - get_viewport().content_scale_size.x + offset
+	min_X = global_position.x - get_viewport().content_scale_size.x + boss_width
 	print("X: ", min_X," ",  max_X)
+	
+	
+	'''Calc Life phases. life_phases is being use to update the boss phase'''
+	for i in range(0, n_phases+1):
+		life_phases.append(float(vidaComponent.MAX_VIDA * i/n_phases))
+	
+	print("Life phases: ", life_phases)
+	
 	
 	'''Flip Sprites (boos spawns at right and should see to the left)'''	
 	$Sprite2D.flip_h = true
@@ -41,6 +53,16 @@ func find_player(node):
 		var result = find_player(node.get_child(i))
 		if result: return result
 
+func update_life_and_phase():
+	'''Update HealtBar'''
+	healtBar.value = vidaComponent.vida
+	
+	'''Update Phase'''
+	for i in range(n_phases-1):
+		if life_phases[i] < vidaComponent.vida and vidaComponent.vida <= life_phases[i+1]:
+			phase = n_phases - i
+	
+	#print("Vida: ", vidaComponent.vida, " // Phase: ", phase)
 	
 
 func _process(_delta):
@@ -50,8 +72,7 @@ func _process(_delta):
 	pass
 	
 func _physics_process(delta):
-	'''Update HealtBar'''
-	healtBar.value = float(vidaComponent.vida * 100 / vidaComponent.MAX_VIDA)
+	update_life_and_phase()
 	
 
 '''Function called when an animation finishes (Set var to false and turing machine may change state)'''
