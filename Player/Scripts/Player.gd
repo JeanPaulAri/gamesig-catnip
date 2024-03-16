@@ -8,9 +8,20 @@ extends CharacterBody2D
 
 var Ability_points:int
 signal Abilities(Ability_points)
+var IsDashingPlayer:bool=0
+var IsSmashingPlayer:bool=0
+var SmashingSpeedPlayer:int=100
+var IsParryingPlayer:bool=0
+
 func _physics_process(delta):
 	move_and_slide()
-	pass
+	#print("Isdashing: ",IsParryingPlayer)
+	if IsSmashingPlayer:
+		velocity.y=SmashingSpeedPlayer
+	elif !IsDashingPlayer and !IsParryingPlayer:
+		velocity.y += PlayerGlobal.get_gravity(velocity.y)*delta
+	else:
+		velocity.y=0
 
 func _input(event: InputEvent) -> void:
 	if(event is InputEventMouseButton and get_tree().current_scene.name == "World"):
@@ -29,12 +40,19 @@ func _ready():
 	self.aim= Global.aim
 	Ability_points=0
 
-
 func _get_catNip():
 	Ability_points+=1
 	print("Got some catNip")
 	
+func _on_player_dash_is_dashing_sig(IsDashing):
+	IsDashingPlayer=IsDashing
+	
+func _on_player_smash_is_smashing_sig(IsSmashing,SmashingSpeed):
+	IsSmashingPlayer=IsSmashing
+	SmashingSpeedPlayer=SmashingSpeed
 
+func _on_player_parry_is_parrying_sig(IsParrying):
+	IsParryingPlayer=IsParrying
 '''
 const LIMIT_Y = 500
 
@@ -250,3 +268,7 @@ func ZoomCamera(levelZoom):
 func _on_hitbox_componente_area_entered(area):
 	pass # Replace with function body.
 '''
+
+
+func _on_dash_check_tile_area_entered(area):
+	pass # Replace with function body.

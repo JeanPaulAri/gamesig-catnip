@@ -1,9 +1,8 @@
 extends State
-class_name PlayerDash
+class_name PlayerParry
 
-var dashSpeed=1000
-var dashCooldown=.99
-var dashLength=.25
+@export var parryCooldown=.99
+@export var parryLength=.25
 
 
 @onready var timer= $ParryTimer
@@ -11,8 +10,10 @@ var dashLength=.25
 @export var AnimationPlay:AnimationPlayer
 @export var player_collider:CollisionShape2D
 @export var hitbox:CollisionShape2D
-@export var player:CharacterBody2D
+@onready var player:CharacterBody2D=$"../.."
 var direction=1
+
+signal IsParryingSig(IsParrying)
 
 func start_parry(dur):
 	timer.wait_time=dur
@@ -29,17 +30,19 @@ func is_cooldown():
 	return !timer2.is_stopped()
 
 func Enter():
+	IsParryingSig.emit(1)
 	AnimationPlay.play("Player_parry")
 	#hitbox.disabled=true
 	#player_collider.disabled=true
-	start_parry(dashLength)
-	cool_down(dashCooldown)
+	start_parry(parryLength)
+	cool_down(parryCooldown)
 	
 func Update(_delta: float):
 	pass
 
 func _on_parry_timer_timeout():
-	player_collider.disabled=false
-	hitbox.disabled=false
+	IsParryingSig.emit(0)
+	#player_collider.disabled=false
+	#hitbox.disabled=false
 	Transitioned.emit(self,"PlayerIdle")
 	pass 

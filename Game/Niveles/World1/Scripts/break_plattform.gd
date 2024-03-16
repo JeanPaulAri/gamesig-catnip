@@ -14,7 +14,7 @@ func _process(delta):
 
 func _on_area_2d_body_entered(body):
 	
-	if (body.name == "Player" and not timer_active):
+	if (body.name == "Player" and not timer_active and PlayerGlobal.IsDashing==false):
 		print("INICIO 1:",body.name)
 		state = false;
 		timer_active = true

@@ -425,6 +425,9 @@ layer_0/tile_data = PackedInt32Array(-589834, 327680, 3, -524298, 327680, 3, -45
 [node name="Player" parent="TileMap" instance=ExtResource("4_cm5h7")]
 position = Vector2(66, 662)
 scale = Vector2(6.89078, 7.60121)
+strength = 0
+agility = 0
+aim = 0
 
 [node name="Dash" parent="TileMap" instance=ExtResource("5_g128n")]
 visible = false
