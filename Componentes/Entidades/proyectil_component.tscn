@@ -4,16 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://d1x4qo520c22g" path="res://icon.svg" id="1_qupwg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ioltd"]
-size = Vector2(124, 122)
+size = Vector2(64, 63)
 
 [node name="ProyectilComponent" type="Area2D"]
 script = ExtResource("1_g45mb")
 
 [node name="ProyectilSprite" type="Sprite2D" parent="."]
+position = Vector2(2, 3.8147e-06)
+scale = Vector2(0.445313, 0.46875)
 texture = ExtResource("1_qupwg")
 
 [node name="ProyectilCollider" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
+position = Vector2(3, -1)
 shape = SubResource("RectangleShape2D_ioltd")
 
 [node name="ProyectileVisibility" type="VisibleOnScreenNotifier2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bkd45842mwucg"]
+[gd_scene load_steps=35 format=3 uid="uid://bkd45842mwucg"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_8jisa"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="2_fb4lv"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/PlayerAttack.gd" id="11_egx8t"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerParry.gd" id="12_cf2s3"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerProyectile.gd" id="12_hkbtk"]
+[ext_resource type="Script" path="res://Player/Scripts/PlayerSmash.gd" id="13_k4vir"]
 
 [sub_resource type="Animation" id="Animation_skedq"]
 resource_name = "Player_attack"
@@ -145,8 +146,8 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_irdfa"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_u16ld"]
+resource_name = "Player_smash"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -154,18 +155,21 @@ tracks/0/path = NodePath("PlayerSprites:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [12, 14]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/PlayerAttackClaw/AttackClawHitbox/AttackClawCollider:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
+
+[sub_resource type="Animation" id="Animation_uqs05"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/PlayerAttackClaw/AttackClawHitbox/AttackClawCollider:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -181,8 +185,9 @@ _data = {
 "Player_idle": SubResource("Animation_cf2ik"),
 "Player_jump": SubResource("Animation_hx6an"),
 "Player_parry": SubResource("Animation_cgkhc"),
+"Player_smash": SubResource("Animation_u16ld"),
 "Player_walk": SubResource("Animation_srmls"),
-"RESET": SubResource("Animation_irdfa")
+"RESET": SubResource("Animation_uqs05")
 }
 
 [sub_resource type="Animation" id="Animation_pqoat"]
@@ -261,8 +266,14 @@ size = Vector2(15.3, 14.85)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjy7y"]
 size = Vector2(16.9, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8fda"]
+size = Vector2(12.3, 11.4)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c38kp"]
 size = Vector2(4.8, 14.05)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqrcd"]
+size = Vector2(31.65, 2.1)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(119, 46)
@@ -275,8 +286,10 @@ position = Vector2(-0.9, -1.5)
 scale = Vector2(0.4875, 0.45)
 texture = ExtResource("2_vdbn0")
 hframes = 29
+frame = 13
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_6dals")
 }
@@ -334,12 +347,19 @@ player_collider = NodePath("../../CollisionShape2D")
 hitbox = NodePath("../../HitboxComponente/HitboxPlayer")
 player = NodePath("../..")
 
+[node name="DashCheckTile" type="Area2D" parent="StateMachine/PlayerDash"]
+
+[node name="DashTileCollider" type="CollisionShape2D" parent="StateMachine/PlayerDash/DashCheckTile"]
+position = Vector2(-1, -0.8)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_o8fda")
+
 [node name="PlayerMovement" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("PlayerSprite", "AnimationPl")]
 script = ExtResource("10_wxkak")
 PlayerSprite = NodePath("../../PlayerSprites")
 AnimationPl = NodePath("../../AnimationPlayer")
-PlayerSpeed = 120.0
-jump_height = 99.0
+PlayerSpeed = 340.0
+jump_height = 300.0
 jump_time_peak = 0.5
 jump_time_descent = 0.4
 
@@ -358,7 +378,7 @@ shape = SubResource("RectangleShape2D_c38kp")
 disabled = true
 
 [node name="AttackClawTimer" type="Timer" parent="StateMachine/PlayerAttackClaw"]
-wait_time = 0.449
+wait_time = 0.3
 one_shot = true
 
 [node name="DeadState" parent="StateMachine" node_paths=PackedStringArray("Machine") instance=ExtResource("11_51ldr")]
@@ -368,14 +388,17 @@ Machine = NodePath("..")
 script = ExtResource("12_hkbtk")
 
 [node name="Bulletposition" type="Marker2D" parent="StateMachine/PlayerProyectile"]
-position = Vector2(11.1, -0.8)
+position = Vector2(15.1, -1.7)
 
-[node name="PlayerParry" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("AnimationPlay", "player_collider", "hitbox", "player")]
+[node name="ProyectileCooldown" type="Timer" parent="StateMachine/PlayerProyectile"]
+wait_time = 0.45
+one_shot = true
+
+[node name="PlayerParry" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("AnimationPlay", "player_collider", "hitbox")]
 script = ExtResource("12_cf2s3")
 AnimationPlay = NodePath("../../AnimationPlayer")
 player_collider = NodePath("../../CollisionShape2D")
 hitbox = NodePath("../../HitboxComponente/HitboxPlayer")
-player = NodePath("../..")
 
 [node name="ParryTimer" type="Timer" parent="StateMachine/PlayerParry"]
 one_shot = true
@@ -383,7 +406,33 @@ one_shot = true
 [node name="CoolDownTimer" type="Timer" parent="StateMachine/PlayerParry"]
 one_shot = true
 
+[node name="PlayerSmash" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("AnimationPlay", "player_collider", "hitbox")]
+script = ExtResource("13_k4vir")
+SmashingSpeed = 1000
+AnimationPlay = NodePath("../../AnimationPlayer")
+player_collider = NodePath("../../CollisionShape2D")
+hitbox = NodePath("../../HitboxComponente/HitboxPlayer")
+
+[node name="CoolDownTimer" type="Timer" parent="StateMachine/PlayerSmash"]
+one_shot = true
+
+[node name="AreaSmash" type="Area2D" parent="StateMachine/PlayerSmash"]
+scale = Vector2(1, 1)
+collision_layer = 4
+collision_mask = 4
+
+[node name="AreaSmashCollider" type="CollisionShape2D" parent="StateMachine/PlayerSmash/AreaSmash"]
+position = Vector2(-0.2, 8.2)
+shape = SubResource("RectangleShape2D_bqrcd")
+disabled = true
+
 [connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
+[connection signal="IsDashingSig" from="StateMachine/PlayerDash" to="." method="_on_player_dash_is_dashing_sig"]
+[connection signal="body_entered" from="StateMachine/PlayerDash/DashCheckTile" to="StateMachine/PlayerDash" method="_on_dash_check_tile_body_entered"]
+[connection signal="NumDirections" from="StateMachine/PlayerMovement" to="StateMachine/PlayerDash" method="_on_player_movement_num_directions"]
 [connection signal="area_entered" from="StateMachine/PlayerAttackClaw/AttackClawHitbox" to="StateMachine/PlayerAttackClaw" method="_on_attack_claw_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/PlayerAttackClaw/AttackClawTimer" to="StateMachine/PlayerAttackClaw" method="_on_attack_claw_timer_timeout"]
+[connection signal="IsParryingSig" from="StateMachine/PlayerParry" to="." method="_on_player_parry_is_parrying_sig"]
 [connection signal="timeout" from="StateMachine/PlayerParry/ParryTimer" to="StateMachine/PlayerParry" method="_on_parry_timer_timeout"]
+[connection signal="IsSmashingSig" from="StateMachine/PlayerSmash" to="." method="_on_player_smash_is_smashing_sig"]
+[connection signal="area_entered" from="StateMachine/PlayerSmash/AreaSmash" to="StateMachine/PlayerSmash" method="_on_area_smash_area_entered"]

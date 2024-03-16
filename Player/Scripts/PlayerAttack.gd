@@ -1,30 +1,38 @@
 extends State
 class_name PlayerAttack
 
-@onready var player=$"../.."
+@onready var player:CharacterBody2D=$"../.."
 @export var PlayerAnimation:AnimationPlayer
 @export var Player_sprite:Sprite2D
 @onready var collider:=$AttackClawHitbox/AttackClawCollider
 
 
-var attack_damage := 10.0
-var knockback_force := 100.0
+@export var attack_damage := 10.0
+@export var knockback_force := 100.0
+
+var direction_x
 
 func Enter():
-	if(PlayerGlobal.last_direction_x == 1):
+	direction_x=PlayerGlobal.last_direction_x
+	if(direction_x == 1):
 		Player_sprite.flip_h=false
 		collider.position.x=10.3
-	elif(PlayerGlobal.last_direction_x==-1):
+	elif(direction_x==-1):
 		Player_sprite.flip_h=true
 		collider.position.x=-12.3
 	PlayerAnimation.play("Player_attack")
 	$AttackClawTimer.start()
 	
 func Update(_delta: float):
-	pass
+	if(direction_x == PlayerGlobal.direction_x):
+		player.velocity.x = PlayerGlobal.direction_x * PlayerGlobal.MoveSpeed 
+	elif(direction_x!=PlayerGlobal.direction_x):
+		player.velocity.x = PlayerGlobal.direction_x * (PlayerGlobal.MoveSpeed/4)  
+	else:
+		player.velocity.x = move_toward(player.velocity.x, 0, PlayerGlobal.MoveSpeed)
 
 func _on_attack_claw_hitbox_area_entered(area):
-	print("Jugador ataca")
+	#print("Jugador ataca")
 	if area is HitboxComponente:
 		var attack=Attack.new()
 		attack.attack_damage=attack_damage
@@ -33,4 +41,6 @@ func _on_attack_claw_hitbox_area_entered(area):
 		area.damage(attack)
 
 func _on_attack_claw_timer_timeout():
+	collider.disabled=true
+	PlayerAnimation.stop()
 	Transitioned.emit(self,"PlayerIdle")

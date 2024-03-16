@@ -8,8 +8,10 @@ var speed=400
 
 func _process(delta):
 	translate(direction.normalized()*speed*delta)
+	#print("Bullet")
 
 func _on_proyectile_visibility_screen_exited():
+	#print("Exited bullet")
 	queue_free()
 
 
