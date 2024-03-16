@@ -22,12 +22,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	simularBackground()
 	pass
 
 func simularBackground():
-	
+	pass
+	'''
 	if(b1.position.x-WIDTH/2 < player.position.x and player.position.x < b1.position.x+WIDTH/2):
 		currentBackground = 1
 	elif(b2.position.x-WIDTH/2 < player.position.x  and player.position.x  < b2.position.x+WIDTH/2):
@@ -51,14 +51,6 @@ func simularBackground():
 		#else:
 		collisionShape.position.x += 8.1
 		cameraPlayer.limit_left = cameraPlayer.limit_left + 8.1
-		
-func _on_area_2d_body_entered(body):
-	if(body.get_name() == "Player"):
-		EstaDentro = true # Replace with function body.
+	'''	
 
-func _on_area_2d_body_exited(body):
-	if(body.get_name() == "Player"):
-		EstaDentro = false
-	# Replace with function body.
-	
 

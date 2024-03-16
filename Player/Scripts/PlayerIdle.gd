@@ -1,38 +1,28 @@
 extends State
 class_name PlayerIdle
 
+@onready var Player=$"../.."
+@onready var Proyectile=$"../PlayerProyectile"
+@onready var Parry=$"../PlayerParry"
 @export var PlayerAnimation:AnimationPlayer
-@onready var WalkSprite:=$"../../WalkSprites"
-@onready var IdleSprite:=$"../../IdleSprites"
-@onready var AttackSprite:=$"../../Attack(temporal)"
-@onready var DeadSprite:=$"../../Muerto"
-var direction_x=1
+@export var PlayerSprite:Sprite2D
 
 func Enter():
-	if(direction_x == 1):
-		IdleSprite.flip_h=false
-	elif(direction_x==-1):
-		IdleSprite.flip_h=true
-	PlayerAnimation.play("IdleLeft") 
-	WalkSprite.visible=false
-	IdleSprite.visible=true
-	AttackSprite.visible=false
-	DeadSprite.visible=false
+	Player.velocity.x=0
+	if(PlayerGlobal.last_direction_x == 1):
+		PlayerSprite.flip_h=false
+	elif(PlayerGlobal.last_direction_x==-1):
+		PlayerSprite.flip_h=true
+	PlayerAnimation.play("Player_idle") 
 
-func Update(_delta: float):
+func Update(_delta: float):	
 	if(Input.get_vector("ui_left","ui_right","ui_up","ui_down")):
-		WalkSprite.visible=true
-		IdleSprite.visible=false
-		AttackSprite.visible=false
-		DeadSprite.visible=false
 		Transitioned.emit(self,"PlayerMovement")
 	if(Input.is_action_just_pressed("ataque")):
-		WalkSprite.visible=false
-		IdleSprite.visible=false
-		AttackSprite.visible=true
-		DeadSprite.visible=false
 		Transitioned.emit(self,"PlayerAttackClaw")
-
-
-func _on_player_movement_direction(dir):
-	direction_x=dir
+	if Input.is_action_just_pressed("PlayerProyectil") and !Proyectile.is_cooldown():
+		Transitioned.emit(self,"PlayerProyectile") 
+	if Input.is_action_just_pressed("PlayerParry") and !Parry.is_cooldown():
+		Transitioned.emit(self,"PlayerParry")
+	if Input.is_action_just_pressed("PlayerSmash") :
+		Transitioned.emit(self,"PlayerSmash")

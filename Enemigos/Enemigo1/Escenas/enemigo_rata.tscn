@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Componentes/Entidades/CatNipDrop.gd" id="10_bm057"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8cd4"]
-size = Vector2(73.7024, 112.543)
+size = Vector2(81.305, 128.996)
 
 [sub_resource type="Animation" id="Animation_1llm3"]
 resource_name = "AttackLeft"
@@ -220,10 +220,11 @@ rotation = 0.00622811
 script = ExtResource("1_2fp4r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(11.59, 14.428)
+position = Vector2(7.06216, 9.95622)
 shape = SubResource("RectangleShape2D_g8cd4")
 
 [node name="Movement" type="Sprite2D" parent="."]
+position = Vector2(0.999981, -0.00622807)
 scale = Vector2(7, 7)
 texture = ExtResource("2_5egyy")
 hframes = 8
@@ -252,10 +253,12 @@ libraries = {
 
 [node name="HitboxComponente" parent="." node_paths=PackedStringArray("vida_componente") instance=ExtResource("4_4hkf1")]
 position = Vector2(-109.776, -124.319)
+collision_layer = 4
+collision_mask = 4
 vida_componente = NodePath("../VidaComponente")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponente"]
-position = Vector2(120.844, 135.25)
+position = Vector2(120.838, 134.25)
 shape = SubResource("RectangleShape2D_vxw1r")
 
 [node name="VidaComponente" parent="." instance=ExtResource("5_sb2iu")]
@@ -277,6 +280,9 @@ WalkSprite = NodePath("../../Movement")
 AttackSprite = NodePath("../../Attack")
 AnimationEn = NodePath("../../AnimationPlayer")
 SpriteSize = 120
+jump_height = 99.0
+jump_time_peak = 0.5
+jump_time_descent = 0.4
 
 [node name="EnemyRatAttack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("PlayerAnimation")]
 script = ExtResource("8_1b4ok")

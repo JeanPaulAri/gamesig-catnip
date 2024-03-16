@@ -9,6 +9,17 @@ class_name PathfindState
 @export var SpriteSize:int
 var player: CharacterBody2D
 
+@export var jump_height : float
+@export var jump_time_peak : float
+@export var jump_time_descent : float
+
+@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_peak)*-1.0
+@onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_peak * jump_time_peak))*-1.0
+@onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_descent * jump_time_descent))*-1.0
+
+func get_gravity()->float:
+	return jump_gravity if enemy.velocity.y < 0.0 else fall_gravity
+
 func Enter():
 	WalkSprite.visible=true
 	AttackSprite.visible=false
@@ -16,10 +27,13 @@ func Enter():
 
 	
 func Physics_Update(delta: float):
+	var dir = enemy.to_local(enemy.global_transform.origin).normalized()
+	print(dir.x)
+	enemy.velocity.y += get_gravity()*delta
 	var direction = player.global_position-enemy.global_position
 	AnimationEn.play("WalkRight")
 	if direction.length()>200:
-		enemy.position += ((player.position+Vector2(5,5))-enemy.position)/move_speed
+		enemy.position.x += ((player.position.x+5)-enemy.position.x)/move_speed
 		if (player.position.x+5)-enemy.position.x>SpriteSize:
 			WalkSprite.flip_h=false
 		else:

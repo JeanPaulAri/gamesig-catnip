@@ -33,5 +33,7 @@ func _on_agility_button_pressed():
 
 func printValuesPlayer():
 	var player = get_tree().get_nodes_in_group("Player")[0]
-	$ValuesText.text =  str(player.strength) + "\n" +   str(player.agility) + "\n" + str(player.aim)
+	print(player)
 	print("HERE -> ", player.strength, player.agility, player.aim)
+	$ValuesText.text =  str(player.strength) + "\n" +   str(player.agility) + "\n" + str(player.aim)
+	
