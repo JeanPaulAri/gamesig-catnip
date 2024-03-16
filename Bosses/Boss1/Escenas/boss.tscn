@@ -1,282 +1,84 @@
-[gd_scene load_steps=34 format=3 uid="uid://dw234wy7bm6a1"]
+[gd_scene load_steps=16 format=3 uid="uid://dw234wy7bm6a1"]
 
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss.gd" id="1_py4en"]
 [ext_resource type="Texture2D" uid="uid://bahf8yu2l6ydv" path="res://Assets/Boss/Crystal Knigth.png" id="2_i6twb"]
-[ext_resource type="Texture2D" uid="uid://bpukigok1ovgn" path="res://Assets/Mecha-stone Golem 0.1/weapon PNG/Laser_sheet.png" id="2_wy6u4"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Turing M.gd" id="3_0edd5"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/idle.gd" id="4_5fhbh"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/state_Boss.gd" id="4_raan0"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Follow.gd" id="5_i6ylk"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Teleport.gd" id="8_pd6s6"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Attack_Left.gd" id="8_r802k"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Beam.gd" id="9_6678r"]
+[ext_resource type="Script" path="res://Bosses/TuringMachineAI.gd" id="5_xjopq"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/idle.gd" id="6_g0736"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/dash.gd" id="9_3svdx"]
 [ext_resource type="PackedScene" uid="uid://bv7eo77rlfpxt" path="res://Componentes/Entidades/hitbox_componente.tscn" id="11_oip8m"]
 [ext_resource type="Script" path="res://Componentes/Entidades/VidaComponente.gd" id="11_yudui"]
-[ext_resource type="PackedScene" uid="uid://cb2kgnwndyg8o" path="res://Bosses/Boss1/Escenas/golpe_boss_1.tscn" id="12_5mkur"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/TuringMachineAI.gd" id="13_nu5jp"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_idle.gd" id="14_v6wah"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Boss1_attack1.gd" id="15_uge1c"]
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss1_attack2.gd" id="16_3umlh"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/spawn.gd" id="18_mndmt"]
-[ext_resource type="Script" path="res://Bosses/Boss1/dash.gd" id="19_4ab8f"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/stunned.gd" id="20_d50bk"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlr7"]
-radius = 21.25
-height = 49.0
-
-[sub_resource type="Animation" id="Animation_k3t4x"]
-resource_name = "Attack Left"
-length = 0.875013
-loop_mode = 1
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [5, 6, 7, 8, 6, 5, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Pivot/Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_m6efg"]
-resource_name = "Attack Right"
-length = 0.625013
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [10, 11, 12, 13, 14]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Pivot/Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_4x1s4"]
-resource_name = "Beam"
-length = 1.87501
-loop_mode = 1
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Pivot/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Turing M/Beam")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.875),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"set_target"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_blsve"]
-resource_name = "Dead"
-length = 1.00001
-loop_mode = 1
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [20, 15, 20, 15, 16, 17, 18, 19]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Pivot/Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_c7a4v"]
-resource_name = "Follow"
-
-[sub_resource type="Animation" id="Animation_rcw1c"]
-resource_name = "Idle"
-length = 0.500013
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Pivot/Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_7csu1"]
+[sub_resource type="Animation" id="Animation_jy66f"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Pivot/Sprite2D:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [10]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../UI debug/Label:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_0esvv"]
-resource_name = "Teleport"
-length = 0.625013
-step = 0.125
+[sub_resource type="Animation" id="Animation_xxrop"]
+resource_name = "attack"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [15, 16, 17, 18, 19]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Pivot/Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"values": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 }
 
-[sub_resource type="Animation" id="Animation_fdl5h"]
-resource_name = "boss rat"
-length = 2.0
+[sub_resource type="Animation" id="Animation_4jt4w"]
+resource_name = "idle"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../UI debug/Label:self_modulate")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.6, 2),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jlsb5"]
+[sub_resource type="Animation" id="Animation_8d1ag"]
+resource_name = "projectile"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 17, 18, 19, 20]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k0gy0"]
 _data = {
-"Attack Left": SubResource("Animation_k3t4x"),
-"Attack Right": SubResource("Animation_m6efg"),
-"Beam": SubResource("Animation_4x1s4"),
-"Dead": SubResource("Animation_blsve"),
-"Follow": SubResource("Animation_c7a4v"),
-"Idle": SubResource("Animation_rcw1c"),
-"RESET": SubResource("Animation_7csu1"),
-"Teleport": SubResource("Animation_0esvv"),
-"boss rat": SubResource("Animation_fdl5h")
+"RESET": SubResource("Animation_jy66f"),
+"attack": SubResource("Animation_xxrop"),
+"idle": SubResource("Animation_4jt4w"),
+"projectile": SubResource("Animation_8d1ag")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_iojl3"]
-radius = 116.017
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lm3ib"]
 radius = 43.5
@@ -289,118 +91,19 @@ collision_mask = 0
 script = ExtResource("1_py4en")
 vidaComponent = NodePath("VidaComponente")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BossSprites" type="Sprite2D" parent="."]
 position = Vector2(-3.5, 2)
 scale = Vector2(2, 2)
 texture = ExtResource("2_i6twb")
 hframes = 5
 vframes = 5
+frame = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, 17)
-scale = Vector2(2, 2)
-shape = SubResource("CapsuleShape2D_kvlr7")
-
-[node name="Pivot" type="Node2D" parent="."]
-position = Vector2(2, -11)
-scale = Vector2(2, 2)
-
-[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-position = Vector2(82, 14)
-scale = Vector2(0.84, 0.84)
-texture = ExtResource("2_wy6u4")
-vframes = 15
-frame = 10
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../CollisionShape2D")
+[node name="bossAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BossSprites")
 libraries = {
-"": SubResource("AnimationLibrary_jlsb5")
+"": SubResource("AnimationLibrary_k0gy0")
 }
-autoplay = "Idle"
-
-[node name="UI debug" type="CanvasLayer" parent="."]
-
-[node name="ProgressBar" type="ProgressBar" parent="UI debug"]
-custom_minimum_size = Vector2(200, 0)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -27.0
-offset_right = 2.0
-grow_horizontal = 2
-grow_vertical = 0
-value = 100.0
-
-[node name="Label" type="Label" parent="UI debug/ProgressBar"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = -28.0
-offset_right = 66.0
-theme_override_font_sizes/font_size = 20
-text = "Ratata"
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="UI debug"]
-self_modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 23
-text = "Boss Ratt"
-
-[node name="debug" type="Label" parent="."]
-offset_left = -23.5
-offset_top = -69.5
-offset_right = 25.5
-offset_bottom = -46.5
-text = "debug
-"
-
-[node name="PlayerDetection" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-visible = false
-position = Vector2(0, 20)
-shape = SubResource("CircleShape2D_iojl3")
-
-[node name="Turing M" type="Node2D" parent="."]
-script = ExtResource("3_0edd5")
-
-[node name="idle" type="Node2D" parent="Turing M"]
-script = ExtResource("4_5fhbh")
-
-[node name="Follow" type="Node2D" parent="Turing M"]
-script = ExtResource("5_i6ylk")
-
-[node name="Dead" type="Node2D" parent="Turing M"]
-script = ExtResource("4_raan0")
-
-[node name="Teleport" type="Node2D" parent="Turing M"]
-script = ExtResource("8_pd6s6")
-
-[node name="Beam" type="Node2D" parent="Turing M"]
-script = ExtResource("9_6678r")
-
-[node name="Attack_Left" type="Node2D" parent="Turing M"]
-script = ExtResource("8_r802k")
-
-[node name="Attack_Right" type="Node2D" parent="Turing M"]
-script = ExtResource("4_raan0")
 
 [node name="VidaComponente" type="Node2D" parent="."]
 position = Vector2(-109.776, -124.319)
@@ -415,25 +118,17 @@ vida_componente = NodePath("../VidaComponente")
 position = Vector2(111.276, 123.319)
 shape = SubResource("CapsuleShape2D_lm3ib")
 
-[node name="GolpeBoss1" parent="." instance=ExtResource("12_5mkur")]
-
 [node name="TuringMachineAI" type="Node2D" parent="."]
-script = ExtResource("13_nu5jp")
+script = ExtResource("5_xjopq")
 
 [node name="idle" type="Node" parent="TuringMachineAI"]
-script = ExtResource("14_v6wah")
-
-[node name="attack1" type="Node" parent="TuringMachineAI"]
-script = ExtResource("15_uge1c")
-
-[node name="attack2" type="Node" parent="TuringMachineAI"]
-script = ExtResource("16_3umlh")
+script = ExtResource("6_g0736")
 
 [node name="spawn" type="Node" parent="TuringMachineAI"]
 script = ExtResource("18_mndmt")
 
 [node name="dash" type="Node" parent="TuringMachineAI"]
-script = ExtResource("19_4ab8f")
+script = ExtResource("9_3svdx")
 
 [node name="stunned" type="Node" parent="TuringMachineAI"]
 script = ExtResource("20_d50bk")
@@ -453,6 +148,5 @@ offset_bottom = 27.0
 grow_horizontal = 2
 value = 100.0
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="PlayerDetection" to="Turing M/idle" method="_on_player_detection_body_entered"]
+[connection signal="animation_finished" from="bossAnimations" to="." method="_on_boss_animations_animation_finished"]
 [connection signal="timeout" from="TuringMachineAI/stunned/Timer" to="TuringMachineAI/stunned" method="_on_timer_timeout"]

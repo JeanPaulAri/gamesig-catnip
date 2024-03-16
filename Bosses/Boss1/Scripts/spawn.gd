@@ -2,10 +2,10 @@ extends State
 class_name boss1_spawn
 
 @onready var boss = $"../.."
-@onready var animation = $"../../AnimationPlayer"
+@onready var bossAnimation = $"../../bossAnimations"
 
 '''Replace this with animation name'''
-@onready var animationName = 'Idle'
+@onready var animationName = 'idle'
 
 @onready var y_objective = 200
 @onready var go_up = 0 
@@ -14,16 +14,16 @@ class_name boss1_spawn
 
 '''Enter just plays idle animation'''
 func Enter():
-	boss.animations[animationName] = true
-	animation.play(animationName)
+	boss.animationsNames[animationName] = true
+	bossAnimation.play(animationName)
 
 func Exit():
-	boss.animations[animationName] = false # Just to make sure every state we exit, has its animation var to false
+	boss.animationsNames[animationName] = false # Just to make sure every state we exit, has its animation var to false
 	
 	
 '''After spawn change to idle'''
 func changeState():
-	if boss.animations[animationName]: return # Animation doesn finished yet
+	if boss.animationsNames[animationName]: return # Animation doesn finished yet
 	if go_up <= y_objective: # Boss still spawning
 		Enter()
 		return 
@@ -39,4 +39,5 @@ func Physics_Update(_delta: float):
 		boss.global_position.y -= step
 		go_up += step
 	changeState()
+	#print(boss.animationsNames)
 	

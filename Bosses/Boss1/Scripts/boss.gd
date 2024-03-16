@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 #@onready var player = find_node('Player')
-@onready var sprite = $Sprite2D
+@onready var sprite = $BossSprites
+#@onready var animation = $bossAnimations
 @onready var healtBar = $CanvasLayer/ProgressBar
 @onready var phase = 1 # starting phase
 @onready var n_phases:int = 4
@@ -13,15 +14,13 @@ extends CharacterBody2D
 
 @export var vidaComponent:VidaComponente
 
-
-
 '''Deprecated Vars'''
 var direction : Vector2
 var dmg = 50
 var HP = 50*16
 
 '''Animation global vars to know if an animation has finished'''
-var animations = {'Idle': false, 'Dash': false, 'Attack Right': false, 'Beam': false}
+var animationsNames = {'Idle': false, 'Dash': false, 'Attack Right': false, 'Beam': false}
 
 
 func _ready():
@@ -41,7 +40,7 @@ func _ready():
 	
 	
 	'''Flip Sprites (boos spawns at right and should see to the left)'''	
-	$Sprite2D.flip_h = true
+	$BossSprites.flip_h = true
 
 
 func find_player(node):
@@ -76,45 +75,9 @@ func _physics_process(delta):
 	
 
 '''Function called when an animation finishes (Set var to false and turing machine may change state)'''
-func _on_animation_player_animation_finished(anim_name):
-	#print("\nAnimation: ", anim_name, " has finished\n")
-	if anim_name not in animations.keys():
+func _on_boss_animations_animation_finished(anim_name):
+	if anim_name not in animationsNames.keys():
 		print("Not in keys")
 		return
-	animations[anim_name] = false
-
-
-
-
-'''Marcelo's Code '''
-'''
-extends CharacterBody2D
-
-@onready var pj = get_parent().find_child("Player")
-@onready var sprite = $Sprite2D
-
-var direction : Vector2
-
-var dmg = 50
-var HP = 50*16
-
-func _ready():
-	set_physics_process(true) # false
-
-func  _process(_delta):
-	direction = pj.position - position
-	if direction.x<0:
-		sprite.flip_h =true
-	else:
-		sprite.flip_h =false
-		
-func _physics_process(delta):
-	velocity = direction.normalized()*50 # 200 (velo)
-	move_and_collide(velocity * delta)
-	
-func dmgPlayer():
-	pj.take_damage(dmg)
-'''
-
-
+	animationsNames[anim_name] = false
 
