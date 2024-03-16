@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dnl7hy42vnlsq"]
 
-[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/Projectile1_Boss1.gd" id="1_ppi4n"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/projectile.gd" id="1_ppi4n"]
 [ext_resource type="Script" path="res://Componentes/Entidades/HitboxComponente.gd" id="2_ck5o1"]
 [ext_resource type="Texture2D" uid="uid://dnjaap5qd3fli" path="res://Assets/Mecha-stone Golem 0.1/weapon PNG/arm_projectile_glowing.png" id="2_psady"]
 
