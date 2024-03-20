@@ -55,6 +55,7 @@ func _on_player_smash_is_smashing_sig(IsSmashing,SmashingSpeed):
 func _on_player_parry_is_parrying_sig(IsParrying):
 	IsParryingPlayer=IsParrying
 	PlayerGlobal.isParrying=IsParrying
+	
 '''
 const LIMIT_Y = 500
 

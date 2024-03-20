@@ -1,8 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkd45842mwucg"]
+[gd_scene load_steps=37 format=3 uid="uid://bkd45842mwucg"]
 
 [ext_resource type="Script" path="res://Player/Scripts/Player.gd" id="1_8jisa"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="2_fb4lv"]
-[ext_resource type="Texture2D" uid="uid://e8eaht75wwl8" path="res://Assets/New_player/GatoPequeño.png" id="2_vdbn0"]
+[ext_resource type="Texture2D" uid="uid://oc6028jrhk3v" path="res://Assets/New_player/Gato2.png" id="2_g8swo"]
 [ext_resource type="PackedScene" uid="uid://cn5spaa1ntxby" path="res://Componentes/state_machine.tscn" id="6_soeu2"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerIdle.gd" id="9_c0tqk"]
 [ext_resource type="PackedScene" uid="uid://cokj7sefj7wkx" path="res://Componentes/Entidades/vida_componente.tscn" id="10_eneoy"]
@@ -13,32 +13,34 @@
 [ext_resource type="Script" path="res://Player/Scripts/PlayerParry.gd" id="12_cf2s3"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerProyectile.gd" id="12_hkbtk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerSmash.gd" id="13_k4vir"]
+[ext_resource type="Script" path="res://Player/Scripts/PlayerHit.gd" id="14_xt0ky"]
+[ext_resource type="Texture2D" uid="uid://r3adohogs1iu" path="res://Assets/New_player/GatoPequeño-Arañazo.png" id="15_vwxdc"]
 
 [sub_resource type="Animation" id="Animation_skedq"]
 resource_name = "Player_attack"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprites:frame")
+tracks/0/path = NodePath("StateMachine/PlayerAttackClaw/AttackClawHitbox/AttackClawCollider:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [11, 12, 13]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/PlayerAttackClaw/AttackClawHitbox/AttackClawCollider:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0.1, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerAttackSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_mylg7"]
@@ -53,7 +55,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [5, 6, 7]
+"values": [6, 7, 8]
 }
 
 [sub_resource type="Animation" id="Animation_nvam2"]
@@ -68,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [10]
+"values": [11]
 }
 
 [sub_resource type="Animation" id="Animation_ngn6q"]
@@ -83,7 +85,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [8, 9]
+"values": [9, 10]
 }
 
 [sub_resource type="Animation" id="Animation_cf2ik"]
@@ -98,7 +100,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [17]
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_hx6an"]
@@ -140,10 +142,10 @@ tracks/0/path = NodePath("PlayerSprites:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [12, 14]
+"values": [13, 14, 15, 16, 17]
 }
 
 [sub_resource type="Animation" id="Animation_srmls"]
@@ -155,10 +157,10 @@ tracks/0/path = NodePath("PlayerSprites:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_uqs05"]
@@ -174,6 +176,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerAttackSprites:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6dals"]
@@ -284,9 +310,9 @@ script = ExtResource("1_8jisa")
 [node name="PlayerSprites" type="Sprite2D" parent="."]
 position = Vector2(-0.9, -1.5)
 scale = Vector2(0.4875, 0.45)
-texture = ExtResource("2_vdbn0")
+texture = ExtResource("2_g8swo")
 hframes = 29
-frame = 13
+frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -424,7 +450,22 @@ position = Vector2(-0.2, 8.2)
 shape = SubResource("RectangleShape2D_bqrcd")
 disabled = true
 
+[node name="PlayerHit" type="Node2D" parent="StateMachine"]
+script = ExtResource("14_xt0ky")
+
+[node name="StunTime" type="Timer" parent="StateMachine/PlayerHit"]
+wait_time = 0.5
+one_shot = true
+
+[node name="PlayerAttackSprites" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2.7125, -0.4)
+scale = Vector2(0.466146, 0.403125)
+texture = ExtResource("15_vwxdc")
+hframes = 2
+
 [connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
+[connection signal="Hit" from="VidaComponente" to="StateMachine/PlayerHit" method="_on_vida_componente_hit"]
 [connection signal="IsDashingSig" from="StateMachine/PlayerDash" to="." method="_on_player_dash_is_dashing_sig"]
 [connection signal="body_entered" from="StateMachine/PlayerDash/DashCheckTile" to="StateMachine/PlayerDash" method="_on_dash_check_tile_body_entered"]
 [connection signal="NumDirections" from="StateMachine/PlayerMovement" to="StateMachine/PlayerDash" method="_on_player_movement_num_directions"]
@@ -434,3 +475,4 @@ disabled = true
 [connection signal="timeout" from="StateMachine/PlayerParry/ParryTimer" to="StateMachine/PlayerParry" method="_on_parry_timer_timeout"]
 [connection signal="IsSmashingSig" from="StateMachine/PlayerSmash" to="." method="_on_player_smash_is_smashing_sig"]
 [connection signal="area_entered" from="StateMachine/PlayerSmash/AreaSmash" to="StateMachine/PlayerSmash" method="_on_area_smash_area_entered"]
+[connection signal="timeout" from="StateMachine/PlayerHit/StunTime" to="StateMachine/PlayerHit" method="_on_stun_time_timeout"]

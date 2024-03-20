@@ -30,7 +30,7 @@ func _on_launch_area_area_entered(area):
 			print("Pathfind")
 			EnemyJet.rotation=0
 			EnemySprite.flip_v=true
-			EnemySprite.flip_h=true
+			#EnemySprite.flip_h=true
 			Transitioned.emit(self,"EnemyJetPathFind")
 		else:
 			var attack=Attack.new()
@@ -38,4 +38,4 @@ func _on_launch_area_area_entered(area):
 			attack.knockback_force=knockback_force
 			attack.attack_position=EnemyJet.global_position
 			area.damage(attack)
-			#queue_free()
+			Transitioned.emit(self,"DeadState")

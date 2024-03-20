@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cmsuk6a2w8ein"]
+[gd_scene load_steps=26 format=3 uid="uid://cmsuk6a2w8ein"]
 
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/Enemigo_Rata.gd" id="1_2fp4r"]
 [ext_resource type="Texture2D" uid="uid://dyj033422p38q" path="res://Assets/Enemigos/Ratones32x32.png" id="2_uhe0k"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/EnemyRatAttack.gd" id="8_1b4ok"]
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/EnemyRatIdle.gd" id="9_g5g42"]
 [ext_resource type="Script" path="res://Componentes/Entidades/CatNipDrop.gd" id="10_bm057"]
+[ext_resource type="Texture2D" uid="uid://jst113n12x8r" path="res://Assets/Enemigos/Raton2-Ataque.png" id="12_owf0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8cd4"]
 size = Vector2(81.305, 128.996)
@@ -129,7 +130,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -143,11 +144,39 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DashSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ext57"]
+resource_name = "Enemy_dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DashSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ke0qo"]
 _data = {
 "AttackLeft": SubResource("Animation_1llm3"),
 "Enemy_attack": SubResource("Animation_65vn4"),
+"Enemy_dash": SubResource("Animation_ext57"),
 "Enemy_dead": SubResource("Animation_dmamq"),
 "Enemy_hit": SubResource("Animation_hmd1j"),
 "Enemy_idle": SubResource("Animation_caioa"),
@@ -178,6 +207,14 @@ position = Vector2(11.7046, 11.0511)
 scale = Vector2(2.73992, 4.03421)
 texture = ExtResource("2_uhe0k")
 hframes = 7
+frame = 3
+
+[node name="DashSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(12.0371, 5.92517)
+scale = Vector2(2.29684, 4.08991)
+texture = ExtResource("12_owf0d")
+hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -199,8 +236,9 @@ shape = SubResource("RectangleShape2D_vxw1r")
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("6_wl1ag")]
 initial_state = NodePath("EnemyRatIdle")
 
-[node name="EnemyRatDash" type="Node2D" parent="StateMachine"]
+[node name="EnemyRatDash" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("PlayerAnimation")]
 script = ExtResource("6_jjlob")
+PlayerAnimation = NodePath("../../AnimationPlayer")
 
 [node name="DashDuration" type="Timer" parent="StateMachine/EnemyRatDash"]
 wait_time = 1.5
@@ -242,7 +280,7 @@ one_shot = true
 [node name="EnemyVisionArea" type="Area2D" parent="StateMachine/EnemyRatIdle"]
 
 [node name="enemyVisionCollider" type="CollisionShape2D" parent="StateMachine/EnemyRatIdle/EnemyVisionArea"]
-position = Vector2(209.499, -9.32138)
+position = Vector2(202.94, -10.2641)
 shape = SubResource("RectangleShape2D_om22e")
 
 [node name="CatNipDrop" type="Marker2D" parent="."]
