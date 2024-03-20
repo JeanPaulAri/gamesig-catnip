@@ -1,7 +1,6 @@
 extends State
-class_name DeadState
 
-@onready var EnemySprite:Sprite2D=$"../../EnemySprites"
+@onready var EnemySprite:Sprite2D=$"../../Sprite2D"
 @export var Machine:StateMachine
 
 func Enter():
@@ -12,5 +11,5 @@ func Update(_delta: float):
 
 func _on_vida_componente_dead_player():
 	print("Dead")
-	Transitioned.emit(Machine._curr_state(),"DeadState")
-	Enter()
+	#Transitioned.emit(Machine._curr_state(),"DeadState")
+	#Enter()

@@ -1,0 +1,192 @@
+[gd_scene load_steps=20 format=3 uid="uid://cxrlbbnn6yeq3"]
+
+[ext_resource type="Texture2D" uid="uid://dyj033422p38q" path="res://Assets/Enemigos/Ratones32x32.png" id="1_2ps1j"]
+[ext_resource type="PackedScene" uid="uid://cn5spaa1ntxby" path="res://Componentes/state_machine.tscn" id="2_7bsag"]
+[ext_resource type="PackedScene" uid="uid://bv7eo77rlfpxt" path="res://Componentes/Entidades/hitbox_componente.tscn" id="3_ddcok"]
+[ext_resource type="PackedScene" uid="uid://cokj7sefj7wkx" path="res://Componentes/Entidades/vida_componente.tscn" id="4_tkgqp"]
+[ext_resource type="Script" path="res://Enemigos/Enemigo2/Scripts/EnemyJetIdle.gd" id="5_qg41y"]
+[ext_resource type="Script" path="res://Enemigos/Enemigo2/Scripts/EnemyJetLaunch.gd" id="6_a20lk"]
+[ext_resource type="Script" path="res://Enemigos/Enemigo2/Scripts/DeadState.gd" id="7_5hkgl"]
+[ext_resource type="Script" path="res://Enemigos/Enemigo2/Scripts/EnemyJetPathFind.gd" id="8_itc87"]
+[ext_resource type="Script" path="res://Enemigos/Enemigo2/Scripts/EnemyJetAttack.gd" id="9_c6xsr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5w02"]
+size = Vector2(79, 111)
+
+[sub_resource type="Animation" id="Animation_txbu1"]
+resource_name = "Enemy_idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_m6r4y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/EnemyJetAttack/JetAttack/AttackCollider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5aj57"]
+resource_name = "Enemy_launch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_g2hso"]
+resource_name = "Enemy_attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/EnemyJetAttack/JetAttack/AttackCollider:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v27su"]
+_data = {
+"Enemy_attack": SubResource("Animation_g2hso"),
+"Enemy_idle": SubResource("Animation_txbu1"),
+"Enemy_launch": SubResource("Animation_5aj57"),
+"RESET": SubResource("Animation_m6r4y")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7l4em"]
+size = Vector2(80, 113.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke1lb"]
+size = Vector2(1297, 904)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6n3d6"]
+size = Vector2(94, 121)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu7cm"]
+size = Vector2(32, 58)
+
+[node name="EnemyJetRat" type="CharacterBody2D"]
+
+[node name="EnemyJetRatCollider" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 5.5)
+shape = SubResource("RectangleShape2D_i5w02")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2.98023e-07)
+scale = Vector2(2.7, 4)
+texture = ExtResource("1_2ps1j")
+flip_h = true
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v27su")
+}
+
+[node name="HitboxComponente" parent="." node_paths=PackedStringArray("vida_componente") instance=ExtResource("3_ddcok")]
+vida_componente = NodePath("../VidaComponente")
+
+[node name="HitboxCollider" type="CollisionShape2D" parent="HitboxComponente"]
+position = Vector2(0, 5.25)
+shape = SubResource("RectangleShape2D_7l4em")
+
+[node name="VidaComponente" parent="." instance=ExtResource("4_tkgqp")]
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("2_7bsag")]
+initial_state = NodePath("EnemyJetIdle")
+
+[node name="EnemyJetIdle" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_qg41y")
+
+[node name="Area2D" type="Area2D" parent="StateMachine/EnemyJetIdle"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/EnemyJetIdle/Area2D"]
+position = Vector2(2, 3)
+shape = SubResource("RectangleShape2D_ke1lb")
+
+[node name="EnemyJetLaunch" type="Node2D" parent="StateMachine"]
+script = ExtResource("6_a20lk")
+
+[node name="LaunchArea" type="Area2D" parent="StateMachine/EnemyJetLaunch"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/EnemyJetLaunch/LaunchArea"]
+position = Vector2(1, 3.5)
+shape = SubResource("RectangleShape2D_6n3d6")
+
+[node name="DeadState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("Machine")]
+script = ExtResource("7_5hkgl")
+Machine = NodePath("..")
+
+[node name="EnemyJetPathFind" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("AnimationEn")]
+script = ExtResource("8_itc87")
+AnimationEn = NodePath("../../AnimationPlayer")
+
+[node name="EnemyJetAttack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("PlayerAnimation")]
+script = ExtResource("9_c6xsr")
+PlayerAnimation = NodePath("../../AnimationPlayer")
+
+[node name="JetAttack" type="Area2D" parent="StateMachine/EnemyJetAttack"]
+
+[node name="AttackCollider" type="CollisionShape2D" parent="StateMachine/EnemyJetAttack/JetAttack"]
+position = Vector2(-66, 9)
+shape = SubResource("RectangleShape2D_gu7cm")
+
+[node name="JetAttackTimer" type="Timer" parent="StateMachine/EnemyJetAttack"]
+
+[connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
+[connection signal="body_entered" from="StateMachine/EnemyJetIdle/Area2D" to="StateMachine/EnemyJetIdle" method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="StateMachine/EnemyJetLaunch/LaunchArea" to="StateMachine/EnemyJetLaunch" method="_on_launch_area_area_entered"]
+[connection signal="area_entered" from="StateMachine/EnemyJetAttack/JetAttack" to="StateMachine/EnemyJetAttack" method="_on_jet_attack_area_entered"]
+[connection signal="timeout" from="StateMachine/EnemyJetAttack/JetAttackTimer" to="StateMachine/EnemyJetAttack" method="_on_jet_attack_timer_timeout"]
