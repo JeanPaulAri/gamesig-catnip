@@ -14,30 +14,34 @@ class_name boss1_stunned
 
 '''Plays animation'''
 func Enter():
-	boss.animationsNames[animationName] = true
 	bossAnimation.play(animationName)
 	
 	'''Set Chrono (Stunned for 2 seconds)''' 
 	timer.start(stunnedTime)
 
 func Exit():
-	boss.animationsNames[animationName] = false # Just to make sure every state we exit, has its animation var to false
 	sprites.flip_h = !sprites.flip_h # Flip Sprites after stunned
 	#timer.time_left = stunnedTime # Reset Timer
 	
 '''After stunned change to dash'''
 func changeState():
-	Transitioned.emit('dash')
+	if boss.phase == 1: Transitioned.emit('dash')
+	elif boss.phase == 2: Transitioned.emit('shoot')
+	elif boss.phase == 3: Transitioned.emit('idle')
+	else: Transitioned.emit('idle')
 	
+	
+'''Function Activated when a boss animation is finished'''
+func animation_finished(anim_name):
+	bossAnimation.play(animationName)
+
 
 func Update(_delta: float):
 	pass
 
 
 func Physics_Update(_delta: float):
-	if not boss.animationsNames[animationName]:
-		boss.animationsNames[animationName] = true
-		bossAnimation.play(animationName)
+	pass
 		 
 	
 '''When timer ends, change state to dash'''

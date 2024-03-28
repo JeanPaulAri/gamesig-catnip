@@ -43,7 +43,9 @@ func updateState(newState : String):
 	previous_state = current_state
 	current_state = stateDic[newState]
 	current_state.Enter()
-	
+
+func currentAnimationFinished(anim_name):
+	current_state.animation_finished(anim_name)
 
 '''Call the current_state Process code'''
 func _process(delta):

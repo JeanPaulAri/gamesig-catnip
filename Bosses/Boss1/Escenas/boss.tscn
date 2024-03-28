@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dw234wy7bm6a1"]
+[gd_scene load_steps=18 format=3 uid="uid://dw234wy7bm6a1"]
 
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/boss.gd" id="1_py4en"]
 [ext_resource type="Texture2D" uid="uid://bahf8yu2l6ydv" path="res://Assets/Boss/Crystal Knigth.png" id="2_i6twb"]
 [ext_resource type="Script" path="res://Bosses/TuringMachineAI.gd" id="5_xjopq"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/idle.gd" id="6_g0736"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/dash.gd" id="9_3svdx"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/shoot.gd" id="9_cjloe"]
+[ext_resource type="Script" path="res://Bosses/Boss1/Scripts/jump.gd" id="10_6i5e5"]
 [ext_resource type="PackedScene" uid="uid://bv7eo77rlfpxt" path="res://Componentes/Entidades/hitbox_componente.tscn" id="11_oip8m"]
 [ext_resource type="Script" path="res://Componentes/Entidades/VidaComponente.gd" id="11_yudui"]
 [ext_resource type="Script" path="res://Bosses/Boss1/Scripts/spawn.gd" id="18_mndmt"]
@@ -85,6 +87,7 @@ radius = 43.5
 height = 125.0
 
 [node name="boss" type="CharacterBody2D" node_paths=PackedStringArray("vidaComponent")]
+position = Vector2(-10, -140)
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 0
@@ -115,7 +118,7 @@ position = Vector2(-109.776, -124.319)
 vida_componente = NodePath("../VidaComponente")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponente"]
-position = Vector2(111.276, 123.319)
+position = Vector2(114.776, 122.819)
 shape = SubResource("CapsuleShape2D_lm3ib")
 
 [node name="TuringMachineAI" type="Node2D" parent="."]
@@ -129,6 +132,12 @@ script = ExtResource("18_mndmt")
 
 [node name="dash" type="Node" parent="TuringMachineAI"]
 script = ExtResource("9_3svdx")
+
+[node name="shoot" type="Node" parent="TuringMachineAI"]
+script = ExtResource("9_cjloe")
+
+[node name="jump" type="Node" parent="TuringMachineAI"]
+script = ExtResource("10_6i5e5")
 
 [node name="stunned" type="Node" parent="TuringMachineAI"]
 script = ExtResource("20_d50bk")
@@ -149,4 +158,5 @@ grow_horizontal = 2
 value = 100.0
 
 [connection signal="animation_finished" from="bossAnimations" to="." method="_on_boss_animations_animation_finished"]
+[connection signal="area_entered" from="HitboxComponente" to="." method="_on_hitbox_componente_area_entered"]
 [connection signal="timeout" from="TuringMachineAI/stunned/Timer" to="TuringMachineAI/stunned" method="_on_timer_timeout"]

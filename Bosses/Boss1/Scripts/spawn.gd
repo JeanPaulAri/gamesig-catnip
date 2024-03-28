@@ -14,30 +14,32 @@ class_name boss1_spawn
 
 '''Enter just plays idle animation'''
 func Enter():
-	boss.animationsNames[animationName] = true
-	bossAnimation.play(animationName)
+	animation_finished(animationName)
 
 func Exit():
-	boss.animationsNames[animationName] = false # Just to make sure every state we exit, has its animation var to false
+	pass
 	
 	
 '''After spawn change to idle'''
 func changeState():
-	if boss.animationsNames[animationName]: return # Animation doesn finished yet
-	if go_up <= y_objective: # Boss still spawning
-		Enter()
-		return 
 	Transitioned.emit('idle')
 	
+
+'''Function Activated when a boss animation is finished'''
+func animation_finished(anim_name):
+	if (anim_name != animationName): print("WEIRD: ", anim_name, " - ", animationName )
+	bossAnimation.play(animationName)
+
 
 func Update(_delta: float):
 	pass
 
+
 '''Floats until reaching the desire altitude'''
 func Physics_Update(_delta: float):
-	if go_up <= y_objective: 
+	if go_up <= y_objective: # Move Up
 		boss.global_position.y -= step
 		go_up += step
-	changeState()
-	#print(boss.animationsNames)
+		
+	if go_up > y_objective: changeState() #When boss is on position
 	

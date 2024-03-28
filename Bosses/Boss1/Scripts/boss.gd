@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #@onready var player = find_node('Player')
 @onready var sprite = $BossSprites
-#@onready var animation = $bossAnimations
+@onready var TM = $TuringMachineAI
 @onready var healtBar = $CanvasLayer/ProgressBar
 @onready var phase = 1 # starting phase
 @onready var n_phases:int = 4
@@ -20,7 +20,10 @@ var dmg = 50
 var HP = 50*16
 
 '''Animation global vars to know if an animation has finished'''
-var animationsNames = {'Idle': false, 'Dash': false, 'Attack Right': false, 'Beam': false}
+#var animationsNames = {'idle': false, 'dash': false, 'projectile': false}
+
+'''We need to obtain this in other way'''
+var plataforms = [Vector2(211,176), Vector2(814,162), Vector2(200,515), Vector2(810,521), Vector2(516,358)]
 
 
 func _ready():
@@ -59,8 +62,10 @@ func update_life_and_phase():
 	'''Update Phase'''
 	for i in range(n_phases-1):
 		if life_phases[i] < vidaComponent.vida and vidaComponent.vida <= life_phases[i+1]:
+			if phase != n_phases - i: print("Boss Fight Phase: ", n_phases - i)
 			phase = n_phases - i
 	
+	#print("Boss Fight Phase: ", phase)
 	#print("Vida: ", vidaComponent.vida, " // Phase: ", phase)
 	
 
@@ -71,13 +76,18 @@ func _process(_delta):
 	pass
 	
 func _physics_process(delta):
-	update_life_and_phase()
-	
+	pass
 
 '''Function called when an animation finishes (Set var to false and turing machine may change state)'''
 func _on_boss_animations_animation_finished(anim_name):
-	if anim_name not in animationsNames.keys():
-		print("Not in keys")
-		return
-	animationsNames[anim_name] = false
+	#if anim_name not in animationsNames.keys():
+		#print("Not in keys: ", anim_name )
+		##return
+	#animationsNames[anim_name] = false
+	TM.currentAnimationFinished(anim_name)
 
+
+
+func _on_hitbox_componente_area_entered(area):
+	update_life_and_phase()
+	
