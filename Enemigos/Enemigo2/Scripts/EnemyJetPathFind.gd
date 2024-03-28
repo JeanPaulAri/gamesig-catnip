@@ -7,6 +7,7 @@ class_name EnemyJetPath
 @onready var SpriteSize:int=-15
 @onready var EnemySprite:Sprite2D=$"../../Sprite2D"
 
+@export var acceleration:int=2
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal CurrDir(Direction)
@@ -16,7 +17,8 @@ func Enter():
 	
 func Update(_delta: float):	
 	if not enemy.is_on_floor():
-		enemy.velocity.y += gravity * _delta
+		enemy.velocity.y += gravity * (_delta + acceleration)
+		acceleration+=acceleration
 	
 	var dir = enemy.to_local(enemy.global_transform.origin).normalized()
 	var direction = PlayerGlobal.Global_Position-enemy.global_position

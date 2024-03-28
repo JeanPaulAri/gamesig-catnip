@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cmsuk6a2w8ein"]
+[gd_scene load_steps=27 format=3 uid="uid://cmsuk6a2w8ein"]
 
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/Enemigo_Rata.gd" id="1_2fp4r"]
 [ext_resource type="Texture2D" uid="uid://dyj033422p38q" path="res://Assets/Enemigos/Ratones32x32.png" id="2_uhe0k"]
@@ -9,12 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://8tradctbhcyf" path="res://Enemigos/Enemigo1/Escenas/path_find_state.tscn" id="7_7vlt8"]
 [ext_resource type="PackedScene" uid="uid://cf50734basigr" path="res://Componentes/Entidades/dead_state.tscn" id="7_xscnu"]
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/EnemyRatAttack.gd" id="8_1b4ok"]
+[ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/dead_state_1.gd" id="8_lre6i"]
 [ext_resource type="Script" path="res://Enemigos/Enemigo1/Scripts/EnemyRatIdle.gd" id="9_g5g42"]
 [ext_resource type="Script" path="res://Componentes/Entidades/CatNipDrop.gd" id="10_bm057"]
 [ext_resource type="Texture2D" uid="uid://jst113n12x8r" path="res://Assets/Enemigos/Raton2-Ataque.png" id="12_owf0d"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8cd4"]
-size = Vector2(81.305, 128.996)
 
 [sub_resource type="Animation" id="Animation_1llm3"]
 resource_name = "AttackLeft"
@@ -56,6 +54,21 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ext57"]
+resource_name = "Enemy_dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DashSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="Animation" id="Animation_dmamq"]
@@ -157,21 +170,6 @@ tracks/2/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_ext57"]
-resource_name = "Enemy_dash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DashSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.6, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ke0qo"]
 _data = {
 "AttackLeft": SubResource("Animation_1llm3"),
@@ -184,23 +182,22 @@ _data = {
 "RESET": SubResource("Animation_g4iq5")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxw1r"]
-size = Vector2(88.7707, 128.48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5d1wi"]
-size = Vector2(53.217, 65.8368)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_om22e"]
 size = Vector2(945.162, 173.389)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5d1wi"]
+size = Vector2(52.6142, 65.8368)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxw1r"]
+size = Vector2(68.0051, 107.004)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8cd4"]
+size = Vector2(68.3412, 106.774)
 
 [node name="Enemigo_Rata" type="CharacterBody2D"]
 position = Vector2(609, 517)
 rotation = 0.00622811
 script = ExtResource("1_2fp4r")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7.06216, 9.95622)
-shape = SubResource("RectangleShape2D_g8cd4")
 
 [node name="EnemySprites" type="Sprite2D" parent="."]
 position = Vector2(11.7046, 11.0511)
@@ -221,16 +218,6 @@ libraries = {
 "": SubResource("AnimationLibrary_ke0qo")
 }
 
-[node name="HitboxComponente" parent="." node_paths=PackedStringArray("vida_componente") instance=ExtResource("4_4hkf1")]
-position = Vector2(-109.776, -124.319)
-collision_layer = 4
-collision_mask = 4
-vida_componente = NodePath("../VidaComponente")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponente"]
-position = Vector2(120.838, 134.25)
-shape = SubResource("RectangleShape2D_vxw1r")
-
 [node name="VidaComponente" parent="." instance=ExtResource("5_sb2iu")]
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("6_wl1ag")]
@@ -249,23 +236,12 @@ wait_time = 6.0
 one_shot = true
 
 [node name="DeadState" parent="StateMachine" node_paths=PackedStringArray("Machine") instance=ExtResource("7_xscnu")]
+script = ExtResource("8_lre6i")
 Machine = NodePath("..")
 
 [node name="PathFindComponent" parent="StateMachine" node_paths=PackedStringArray("AnimationEn") instance=ExtResource("7_7vlt8")]
 move_speed = 100.0
 AnimationEn = NodePath("../../AnimationPlayer")
-
-[node name="EnemyRatAttack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("PlayerAnimation")]
-script = ExtResource("8_1b4ok")
-PlayerAnimation = NodePath("../../AnimationPlayer")
-
-[node name="EnemyRatAttackHitbox" type="Area2D" parent="StateMachine/EnemyRatAttack"]
-
-[node name="EnemyRatAttackCollider" type="CollisionShape2D" parent="StateMachine/EnemyRatAttack/EnemyRatAttackHitbox"]
-position = Vector2(91.5824, 28.5137)
-shape = SubResource("RectangleShape2D_5d1wi")
-
-[node name="EnemyRatAttackTimer" type="Timer" parent="StateMachine/EnemyRatAttack"]
 
 [node name="EnemyRatIdle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("PlayerAnimation")]
 script = ExtResource("9_g5g42")
@@ -283,18 +259,44 @@ one_shot = true
 position = Vector2(202.94, -10.2641)
 shape = SubResource("RectangleShape2D_om22e")
 
+[node name="EnemyRatAttack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("PlayerAnimation")]
+script = ExtResource("8_1b4ok")
+PlayerAnimation = NodePath("../../AnimationPlayer")
+
+[node name="EnemyRatAttackHitbox" type="Area2D" parent="StateMachine/EnemyRatAttack"]
+
+[node name="EnemyRatAttackCollider" type="CollisionShape2D" parent="StateMachine/EnemyRatAttack/EnemyRatAttackHitbox"]
+position = Vector2(71.828, 20.5511)
+shape = SubResource("RectangleShape2D_5d1wi")
+
+[node name="EnemyRatAttackTimer" type="Timer" parent="StateMachine/EnemyRatAttack"]
+
 [node name="CatNipDrop" type="Marker2D" parent="."]
 position = Vector2(-56.1982, -31.6506)
 script = ExtResource("10_bm057")
+
+[node name="HitboxComponente" parent="." node_paths=PackedStringArray("vida_componente") instance=ExtResource("4_4hkf1")]
+position = Vector2(-109.776, -124.319)
+collision_layer = 4
+collision_mask = 4
+vida_componente = NodePath("../VidaComponente")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponente"]
+position = Vector2(115.873, 138.803)
+shape = SubResource("RectangleShape2D_vxw1r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.92828, 14.562)
+shape = SubResource("RectangleShape2D_g8cd4")
 
 [connection signal="DeadPlayer" from="VidaComponente" to="StateMachine/DeadState" method="_on_vida_componente_dead_player"]
 [connection signal="DeadPlayer" from="VidaComponente" to="CatNipDrop" method="_on_vida_componente_dead_player"]
 [connection signal="timeout" from="StateMachine/EnemyRatDash/DashDuration" to="StateMachine/EnemyRatDash" method="_on_dash_duration_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyRatDash/DashCooldown" to="StateMachine/EnemyRatDash" method="_on_dash_cooldown_timeout"]
-[connection signal="area_entered" from="StateMachine/EnemyRatAttack/EnemyRatAttackHitbox" to="StateMachine/EnemyRatAttack" method="_on_enemy_rat_attack_hitbox_area_entered"]
-[connection signal="timeout" from="StateMachine/EnemyRatAttack/EnemyRatAttackTimer" to="StateMachine/EnemyRatAttack" method="_on_enemy_rat_attack_timer_timeout"]
 [connection signal="IsStateOff" from="StateMachine/EnemyRatIdle" to="." method="_on_enemy_rat_idle_is_state_off"]
 [connection signal="timeout" from="StateMachine/EnemyRatIdle/IdleCooldown" to="StateMachine/EnemyRatIdle" method="_on_idle_cooldown_timeout"]
 [connection signal="timeout" from="StateMachine/EnemyRatIdle/EnemyIdleWalkingTimer" to="StateMachine/EnemyRatIdle" method="_on_enemy_idle_walking_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/EnemyRatIdle/EnemyVisionArea" to="StateMachine/EnemyRatIdle" method="_on_enemy_vision_area_body_entered"]
 [connection signal="body_exited" from="StateMachine/EnemyRatIdle/EnemyVisionArea" to="StateMachine/PathFindComponent" method="_on_enemy_vision_area_body_exited"]
+[connection signal="area_entered" from="StateMachine/EnemyRatAttack/EnemyRatAttackHitbox" to="StateMachine/EnemyRatAttack" method="_on_enemy_rat_attack_hitbox_area_entered"]
+[connection signal="timeout" from="StateMachine/EnemyRatAttack/EnemyRatAttackTimer" to="StateMachine/EnemyRatAttack" method="_on_enemy_rat_attack_timer_timeout"]

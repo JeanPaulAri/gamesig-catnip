@@ -8,6 +8,9 @@ class_name HitState
 @onready var PlayAnim:AnimationPlayer=$"../../AnimationPlayer"
 
 func Enter():
+	call_deferred("enter_deffered")
+
+func enter_deffered():
 	HitboxCollider.disabled=true
 	PlayAnim.play("Player_hit")
 
