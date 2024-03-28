@@ -7,4 +7,4 @@ func _drop_catnip():
 	add_child(coin_instance)
 
 func _on_vida_componente_dead_player():
-	_drop_catnip()
+	call_deferred("_drop_catnip")

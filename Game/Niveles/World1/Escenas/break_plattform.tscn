@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://oiqfphwkc1ub"]
+[gd_scene load_steps=8 format=3 uid="uid://dxfk5d23rowj1"]
 
 [ext_resource type="Texture2D" uid="uid://dppeof3ex5vtc" path="res://Assets/Map/TestPlatform.png" id="1_atij3"]
 [ext_resource type="Script" path="res://Game/Niveles/World1/Scripts/break_plattform.gd" id="1_fjem4"]
@@ -64,7 +64,7 @@ autoplay = "Tuerca"
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.4, -2.19429)
+position = Vector2(0.6, -1.39637)
 shape = SubResource("RectangleShape2D_mclns")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
