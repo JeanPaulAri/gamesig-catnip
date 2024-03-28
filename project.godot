@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Cat-nip-Postreg"
-run/main_scene="res://Game/Niveles/World1/Escenas/World1_RATANK_TEST_BOSS.tscn"
+config/name="Cat-nip-GameSig"
+run/main_scene="res://Game/Niveles/World1/Escenas/World1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -60,4 +60,4 @@ PlayerSmash={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter=3

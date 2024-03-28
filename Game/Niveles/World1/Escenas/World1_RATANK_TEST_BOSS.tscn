@@ -416,6 +416,7 @@ sources/0 = SubResource("TileSetAtlasSource_erkjh")
 script = ExtResource("1_njtrk")
 
 [node name="Background" parent="." instance=ExtResource("2_8a204")]
+texture_filter = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_lx6kb")
