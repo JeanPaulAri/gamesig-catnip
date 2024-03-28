@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bkd45842mwucg" path="res://Player/Escenas/Player.tscn" id="4_cm5h7"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="5_g128n"]
 [ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Game/UI/Scenes/menu_paused.tscn" id="6_1brnw"]
-[ext_resource type="PackedScene" path="res://Game/Niveles/World1/Escenas/break_plattform.tscn" id="7_e5j11"]
+[ext_resource type="PackedScene" uid="uid://oiqfphwkc1ub" path="res://Game/Niveles/World1/Escenas/break_plattform.tscn" id="7_e5j11"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_erkjh"]
 texture = ExtResource("3_pgk1v")
@@ -416,6 +416,7 @@ sources/0 = SubResource("TileSetAtlasSource_erkjh")
 script = ExtResource("1_njtrk")
 
 [node name="Background" parent="." instance=ExtResource("2_8a204")]
+texture_filter = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_lx6kb")

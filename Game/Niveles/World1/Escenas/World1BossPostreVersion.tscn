@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bkd45842mwucg" path="res://Player/Escenas/Player.tscn" id="4_qutlc"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="5_rkbg0"]
 [ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Game/UI/Scenes/menu_paused.tscn" id="6_b2jhq"]
-[ext_resource type="PackedScene" path="res://Game/Niveles/World1/Escenas/break_plattform.tscn" id="7_glufl"]
+[ext_resource type="PackedScene" uid="uid://oiqfphwkc1ub" path="res://Game/Niveles/World1/Escenas/break_plattform.tscn" id="7_glufl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_erkjh"]
 texture = ExtResource("3_kwlne")

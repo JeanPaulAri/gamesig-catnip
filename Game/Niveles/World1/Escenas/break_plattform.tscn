@@ -64,16 +64,13 @@ autoplay = "Tuerca"
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.6, -1.39637)
-scale = Vector2(1, 1)
+position = Vector2(0.4, -2.19429)
 shape = SubResource("RectangleShape2D_mclns")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0.2, 0.685219)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3a5ov")
 one_way_collision = true
 
