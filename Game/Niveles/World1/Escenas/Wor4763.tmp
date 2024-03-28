@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://jh8dfcb13tlc"]
+[gd_scene load_steps=12 format=3 uid="uid://jh8dfcb13tlc"]
 
 [ext_resource type="Script" path="res://Game/Niveles/World1/Scripts/World.gd" id="1_e2y3o"]
 [ext_resource type="PackedScene" uid="uid://d4aye30taop7c" path="res://Game/Niveles/World1/Escenas/background.tscn" id="2_dh8no"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bkd45842mwucg" path="res://Player/Escenas/Player.tscn" id="4_qutlc"]
 [ext_resource type="PackedScene" uid="uid://cxrlbbnn6yeq3" path="res://Enemigos/Enemigo2/Scenes/enemy_jet_rat.tscn" id="4_w2te3"]
 [ext_resource type="PackedScene" uid="uid://cfrhe4fqy3rbp" path="res://Player/Escenas/dash.tscn" id="5_rkbg0"]
-[ext_resource type="Script" path="res://Enemigos/Enemigo2/Scripts/enemy_jet_rat.gd" id="5_vtxum"]
 [ext_resource type="PackedScene" uid="uid://dmme5lj1ruujk" path="res://Game/UI/Scenes/menu_paused.tscn" id="6_b2jhq"]
 [ext_resource type="PackedScene" uid="uid://dxfk5d23rowj1" path="res://Game/Niveles/World1/Escenas/break_plattform.tscn" id="7_glufl"]
 
@@ -427,7 +426,6 @@ layer_0/tile_data = PackedInt32Array(-589834, 327680, 3, -524298, 327680, 3, -45
 
 [node name="EnemyJetRat" parent="TileMap" instance=ExtResource("4_w2te3")]
 position = Vector2(1199, 250)
-script = ExtResource("5_vtxum")
 
 [node name="Enemigo_Rata" parent="TileMap" instance=ExtResource("4_7su4h")]
 position = Vector2(1039, 620)

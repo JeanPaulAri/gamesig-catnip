@@ -19,7 +19,6 @@ func _ready():
 	#print( get_tree().current_scene.get_node("Player").name)
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	simularBackground()

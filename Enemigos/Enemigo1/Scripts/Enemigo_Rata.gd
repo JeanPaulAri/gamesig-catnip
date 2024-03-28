@@ -1,10 +1,21 @@
 extends CharacterBody2D
 class_name RatEnemy
 
+var EnemyCurrIdle:bool=1
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 func _physics_process(_delta):
-	pass
-	
-	
+	move_and_slide()
+
+	if not is_on_floor():
+		velocity.y += gravity * _delta
+
+func _on_enemy_rat_idle_is_state_off(State):
+	EnemyCurrIdle=State
+
+func get_CurrIdle():
+	return EnemyCurrIdle
+
 '''
 var speed:int = 100
 var player_chase:bool = false

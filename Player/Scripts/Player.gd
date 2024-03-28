@@ -15,6 +15,7 @@ var IsParryingPlayer:bool=0
 
 func _physics_process(delta):
 	move_and_slide()
+	PlayerGlobal.Global_Position=position
 	#print("Isdashing: ",IsParryingPlayer)
 	if IsSmashingPlayer:
 		velocity.y=SmashingSpeedPlayer
@@ -53,6 +54,8 @@ func _on_player_smash_is_smashing_sig(IsSmashing,SmashingSpeed):
 
 func _on_player_parry_is_parrying_sig(IsParrying):
 	IsParryingPlayer=IsParrying
+	PlayerGlobal.isParrying=IsParrying
+	
 '''
 const LIMIT_Y = 500
 

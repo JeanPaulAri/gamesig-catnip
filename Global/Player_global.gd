@@ -1,21 +1,20 @@
 extends Node
-var jump_height : float
-var jump_time_peak : float
-var jump_time_descent : float
 
 var jump_velocity: float 
 var jump_gravity : float 
 var fall_gravity : float 
 
-var direction_x
-var last_direction_x
+var direction_x:int
+var last_direction_x:int
+var direction_y:int
+var last_direction_y:int
 
-var direction_y
-var last_direction_y
+var MoveSpeed:int
 
-var MoveSpeed
+var IsDashing:bool
+var isParrying:bool
 
-var IsDashing
+var Global_Position:Vector2
 
 func _ready():
 	direction_x=0
@@ -31,9 +30,9 @@ func _process(delta):
 		last_direction_y=direction_y
 
 func SetGravity(jh,jtp,jtd):
-	jump_height=jh
-	jump_time_peak=jtp
-	jump_time_descent=jtd
+	var jump_height=jh
+	var jump_time_peak=jtp
+	var jump_time_descent=jtd
 	
 	jump_velocity = ((2.0 * jump_height) / jump_time_peak)*-1.0
 	jump_gravity = ((-2.0 * jump_height) / (jump_time_peak * jump_time_peak))*-1.0
